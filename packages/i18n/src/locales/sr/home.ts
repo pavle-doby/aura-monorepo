@@ -9,6 +9,7 @@ export const home = {
     danger: 'Opasni prekidač',
     success: 'Uspešni prekidač',
   },
+  greeting: 'Zdravooo, {{firstName}}!',
   linkToUser: 'Link ka korisniku',
   login: 'Prijava',
   signOut: 'Odjava',

@@ -10,6 +10,8 @@ const webConfig: I18nConfig = {
   // Recommended: works on all platforms including Vercel/serverless
   resourceLoader: (language, _namespace) =>
     import(`./locales/${language}/index`).then((m) => m.default),
+  // Disable caching in dev so HMR changes to locale files are reflected immediately
+  ...(process.env.NODE_ENV === 'development' && { cache: false }),
 };
 
 export default webConfig;

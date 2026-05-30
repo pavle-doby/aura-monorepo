@@ -8,6 +8,10 @@ import i18nConfig, {
   getResources,
   initServerI18next,
 } from "@repo/i18n/server";
+import { Montserrat } from "next/font/google";
+import { cn } from "@repo/utils";
+
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
 
 initServerI18next(i18nConfig);
 
@@ -31,11 +35,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const { i18n, lng } = await getT();
+
+  if (process.env.NODE_ENV === "development") {
+    await i18n.reloadResources();
+  }
+
   const resources = getResources(i18n);
 
   return (
     <I18nProvider language={lng} resources={resources}>
-      <html lang={lng}>
+      <html lang={lng} className={cn("dark font-sans", montserrat.variable)}>
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
           <ApiClientProvider>{children}</ApiClientProvider>
         </body>

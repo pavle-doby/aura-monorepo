@@ -9,6 +9,7 @@ export const home = {
     danger: 'Danger Switch',
     success: 'Success Switch',
   },
+  greeting: 'Hellooo, {{firstName}}!',
   linkToUser: 'Link to user',
   login: 'Login',
   signOut: 'Sign Out',

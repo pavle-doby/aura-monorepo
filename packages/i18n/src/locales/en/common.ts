@@ -1,7 +1,8 @@
 export const common = {
-  helloWorld: 'Hello, World!',
+  helloWorld: "Hello, World!",
+  hello: "Hello, {name}!",
   languageSwitcher: {
-    sr: 'SR',
-    en: 'EN',
+    sr: "SR",
+    en: "EN",
   },
 };
