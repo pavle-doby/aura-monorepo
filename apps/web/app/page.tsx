@@ -1,32 +1,34 @@
-"use client";
+"use client"
 
-import { useGetUserSelf } from "@repo/api-client";
-import { useT } from "@repo/i18n/client";
-import { Button } from "@repo/ui-web/ui/button";
+import { useGetUserSelf } from "@repo/api-client"
+import { useT } from "@repo/i18n/client"
+import { Button } from "@repo/ui/components/button"
 
-export default function Home() {
-  const { data, isPending } = useGetUserSelf();
-  const { t } = useT();
+export default function Page() {
+  const { data, isPending } = useGetUserSelf()
+  const { t } = useT()
 
-  console.log({ data, isPending });
+  console.log({ data, isPending })
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 p-8">
-      <div className="flex flex-col items-center gap-4">
-        <h1 className="text-3xl font-bold underline">
-          {t("home.greeting", { firstName: data?.firstName })}
-        </h1>
-
+    <div className="flex min-h-svh p-6">
+      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
         <div>
-          <Button variant="outline" size="lg">
-            Button
-          </Button>
+          <h1 className="font-medium">
+            {t("hello", { name: data?.firstName })}
+          </h1>
+          <p>You may now add components and start building.</p>
+          <p>We&apos;ve already added the button component for you.</p>
+          <Button className="mt-2">Button</Button>
+        </div>
+        <div className="font-mono text-xs text-muted-foreground">
+          (Press <kbd>d</kbd> to toggle dark mode)
         </div>
       </div>
     </div>
-  );
+  )
 }
