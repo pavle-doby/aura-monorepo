@@ -379,9 +379,6 @@ importers:
       react-dom:
         specifier: 19.2.4
         version: 19.2.4(react@19.2.4)
-      shadcn:
-        specifier: ^4.8.3
-        version: 4.8.3(@types/node@20.19.41)(typescript@5.9.3)
       tailwind-merge:
         specifier: ^3.6.0
         version: 3.6.0
@@ -416,6 +413,9 @@ importers:
       eslint:
         specifier: ^9
         version: 9.39.1(jiti@2.7.0)
+      shadcn:
+        specifier: ^4.8.3
+        version: 4.8.3(@types/node@20.19.41)(typescript@5.9.3)
       tailwindcss:
         specifier: ^4
         version: 4.3.0
