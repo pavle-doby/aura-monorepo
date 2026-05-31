@@ -6,10 +6,13 @@
     "dev": "expo start -c",
     "android": "expo start -c --android",
     "ios": "expo start -c --ios",
+    "ios:15": "expo run:ios --device 'iPhone 15'",
     "web": "expo start -c --web",
     "clean": "rm -rf .expo node_modules"
   },
   "dependencies": {
+    "@repo/ui-native": "workspace:*",
+    "@repo/ui-theme": "workspace:*",
     "@react-navigation/native": "^7.0.0",
     "@rn-primitives/portal": "~1.4.0",
     "@rn-primitives/slot": "^1.4.0",
