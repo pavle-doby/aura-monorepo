@@ -22,8 +22,16 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full directory tree, data-flow 
 
 ## How to run
 
+## Prerequisites
+
+Copy the example env files and fill in the required values (e.g. Supabase URL and keys).
+
 ```bash
+## Install dependencies
 pnpm install
+
+## Generate API client (run after any route/schema change)
+pnpm api-client:generate
 ```
 
 ```bash
