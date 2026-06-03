@@ -32,6 +32,9 @@ pnpm install
 
 ## Generate API client (run after any route/schema change)
 pnpm api-client:generate
+
+## Initialize codegraph (AI code assistant) — optional but recommended
+codegraph init
 ```
 
 ```bash

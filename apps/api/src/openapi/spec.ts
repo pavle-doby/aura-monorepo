@@ -12,7 +12,7 @@ export function generateOpenAPIDocument(): OpenAPIObject {
   return generator.generateDocument({
     openapi: '3.1.0',
     info: {
-      title: 'Course Hub API',
+      title: 'Aura Monorepo API',
       version: '1.0.0',
     },
     servers: [{ url: '/api' }],

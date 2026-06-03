@@ -1,0 +1,12 @@
+{
+  "extends": "@repo/typescript-config/react-library.json",
+  "compilerOptions": {
+    "paths": {
+      "@repo/shared/hooks": ["./src/hooks/index.ts"],
+      "@repo/shared/consts": ["./src/consts/index.ts"],
+      "@repo/shared/utils": ["./src/utils/index.ts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

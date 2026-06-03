@@ -1,7 +1,7 @@
 export const auth = {
   login: {
     title: 'Welcome back!',
-    info: 'Log in to your Course Hub account to continue.',
+    info: 'Log in to your account to continue.',
     emailLabel: 'Email',
     emailPlaceholder: 'your@email.com',
     passwordLabel: 'Password',
@@ -19,7 +19,7 @@ export const auth = {
     loginSuccessful: 'Login successful',
   },
   signup: {
-    title: 'Create your Course Hub account',
+    title: 'Create your account',
     info: 'Free. Simple. Sassy.',
     firstNameLabel: 'First Name',
     firstNamePlaceholder: 'John',
