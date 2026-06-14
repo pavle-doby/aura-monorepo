@@ -71,7 +71,7 @@ Detailed conventions are auto-loaded when you work in these paths:
 | `packages/db-schema/**`  | [db-schema.instructions.md](instructions/db-schema.instructions.md)   |
 | `packages/db/**`         | [db.instructions.md](instructions/db.instructions.md)                 |
 | `packages/api-client/**` | [api-client.instructions.md](instructions/api-client.instructions.md) |
-| `packages/ui/**`         | [ui.instructions.md](instructions/ui.instructions.md)                 |
+| `packages/ui-web/**`     | [ui.instructions.md](instructions/ui.instructions.md)                 |
 | `packages/ui-native/**`  | [ui-native.instructions.md](instructions/ui-native.instructions.md)   |
 | `packages/ui-theme/**`   | [ui-theme.instructions.md](instructions/ui-theme.instructions.md)     |
 | `packages/i18n/**`       | [i18n.instructions.md](instructions/i18n.instructions.md)             |

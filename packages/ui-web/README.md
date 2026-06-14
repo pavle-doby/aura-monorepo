@@ -1,4 +1,4 @@
-# @repo/ui
+# @repo/ui-web
 
 Shared UI component library for the monorepo, built with [shadcn/ui](https://ui.shadcn.com/) and Tailwind CSS.
 
@@ -13,12 +13,12 @@ cd apps/web
 pnpm dlx shadcn@latest add [COMPONENT]
 ```
 
-For example, `pnpm dlx shadcn@latest add button` installs the `Button` component under `packages/ui/src/components/`.
+For example, `pnpm dlx shadcn@latest add button` installs the `Button` component under `packages/ui-web/src/components/`.
 
-After adding a component, export it from `src/index.ts` if it isn't picked up automatically so other apps can import it via `@repo/ui`.
+After adding a component, export it from `src/index.ts` if it isn't picked up automatically so other apps can import it via `@repo/ui-web`.
 
 ## Usage in apps
 
 ```tsx
-import { Button } from "@repo/ui/components/button";
+import { Button } from "@repo/ui-web/components/button";
 ```

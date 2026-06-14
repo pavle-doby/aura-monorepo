@@ -11,16 +11,16 @@ Next.js 16 (App Router), React 19, Tailwind CSS 4, shadcn (radix-nova style). Th
 
 | Type | Location | Import alias |
 |------|----------|--------------|
-| Primitive / shadcn UI | `packages/ui/src/components/` | `@repo/ui/components/<name>` |
+| Primitive / shadcn UI | `packages/ui-web/src/components/` | `@repo/ui-web/components/<name>` |
 | App-specific composed components | `apps/web/components/` | `@/components/<name>` |
 | App-specific hooks | `apps/web/hooks/` | `@/hooks/<name>` |
 | App-specific providers | `apps/web/providers/` | `@/providers/<name>` |
 
-Never define reusable primitives inline in the web app — add them to `@repo/ui`.
+Never define reusable primitives inline in the web app — add them to `@repo/ui-web`.
 
 ```tsx
 // ✅ correct
-import { Button } from "@repo/ui/components/button";
+import { Button } from "@repo/ui-web/components/button";
 import { LoginForm } from "@/components/login-form";
 
 // ❌ wrong — primitive defined locally
@@ -83,10 +83,10 @@ Never import i18n server utilities in client components or vice versa.
 
 ## Styling
 
-Use Tailwind utility classes and `cn()` from `@repo/ui/lib/utils` to conditionally merge them. Design tokens come from `@repo/ui-theme` via CSS variables — never hardcode colours or spacing.
+Use Tailwind utility classes and `cn()` from `@repo/ui-web/lib/utils` to conditionally merge them. Design tokens come from `@repo/ui-theme` via CSS variables — never hardcode colours or spacing.
 
 ```tsx
-import { cn } from "@repo/ui/lib/utils";
+import { cn } from "@repo/ui-web/lib/utils";
 
 // ✅ correct — CSS variable tokens
 <div className={cn("bg-background text-foreground border-border", className)} />
@@ -128,7 +128,7 @@ Add new providers by wrapping inside the existing provider tree in `layout.tsx`.
 | Alias | Resolves to |
 |-------|-------------|
 | `@/*` | `apps/web/*` |
-| `@repo/ui/*` | `packages/ui/src/*` |
+| `@repo/ui-web/*` | `packages/ui-web/src/*` |
 | `@repo/api-client` | `packages/api-client/src` |
 | `@repo/i18n/*` | `packages/i18n/src/*` |
 | `@repo/contract` | `packages/contract/src` |

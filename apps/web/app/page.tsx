@@ -2,7 +2,7 @@
 
 import { useGetUserSelf } from "@repo/api-client"
 import { useT } from "@repo/i18n/client"
-import { Button } from "@repo/ui/components/button"
+import { Button } from "@repo/ui-web/components/button"
 
 export default function Page() {
   const { data, isPending } = useGetUserSelf()

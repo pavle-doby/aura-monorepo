@@ -45,7 +45,7 @@ const myVariants = cva(
 );
 ```
 
-Key differences from `@repo/ui` (web):
+Key differences from `@repo/ui-web` (web):
 - Use `Pressable` / `Text` / `View` from `react-native`, not HTML elements.
 - `active:` pseudo-class = native press feedback. `hover:` only applies on web.
 - No `asChild` / Radix Slot — use `@rn-primitives/slot` (`Slot` from `'@rn-primitives/slot'`).

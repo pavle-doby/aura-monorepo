@@ -1,92 +1,221 @@
 "use client"
 
-import { useId } from "react"
+import { useId, useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { AlertCircleIcon, Eye, EyeOff } from "lucide-react"
+import { useAuthSignUp } from "@repo/api-client"
+import { AuthSignUpQuerySchema } from "@repo/contract"
+import { useT } from "@repo/i18n/client"
+import { Card, CardContent } from "@repo/ui-web/components/card"
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@repo/ui/components/card"
-import { Field, FieldGroup, FieldLabel } from "@repo/ui/components/field"
-import { Input } from "@repo/ui/components/input"
-import { Button } from "@repo/ui/components/button"
-import { cn } from "@repo/ui/lib/utils"
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@repo/ui-web/components/field"
+import { Input } from "@repo/ui-web/components/input"
+import { Alert, AlertTitle } from "@repo/ui-web/components/alert"
+import { Button } from "@repo/ui-web/components/button"
+import { cn } from "@repo/ui-web/lib/utils"
+
+const SignupFormSchema = AuthSignUpQuerySchema.extend({
+  confirmPassword: z.string(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+})
+
+type SignupFormData = z.infer<typeof SignupFormSchema>
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const id = useId()
+  const router = useRouter()
+  const { t } = useT()
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  const { mutate: signupMutate, isPending } = useAuthSignUp()
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<SignupFormData>({
+    resolver: zodResolver(SignupFormSchema),
+  })
+
+  function onSubmit(formData: SignupFormData) {
+    const { firstName, lastName, email, password } = formData
+    signupMutate(
+      { data: { firstName, lastName, email, password } },
+      {
+        onSuccess: () => {
+          router.replace("/")
+        },
+        // TODO@pavle: Handle errors better.
+        onError: (error: unknown) => {
+          const axiosError = error as {
+            response?: { data?: { code?: string; message?: string } }
+          }
+          const code = axiosError?.response?.data?.code
+          const message =
+            axiosError?.response?.data?.message ??
+            "Signup failed. Please try again."
+
+          if (code === "auth_user_exists") {
+            setError("email", { message })
+          } else {
+            setError("root", { message })
+          }
+        },
+      }
+    )
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
-        <CardHeader>
-          <CardTitle>Create an account</CardTitle>
-          <CardDescription>Fill in your details to get started</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
+        <CardContent className="flex flex-col gap-6 pt-6">
+          <h1 className="text-3xl font-bold">{t("auth.signup.title")}</h1>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <FieldGroup>
               <div className="grid grid-cols-2 gap-4">
                 <Field>
                   <FieldLabel htmlFor={`${id}-first-name`}>
-                    First name
+                    {t("auth.signup.firstNameLabel")}
                   </FieldLabel>
                   <Input
                     id={`${id}-first-name`}
                     type="text"
-                    placeholder="John"
-                    required
+                    placeholder={t("auth.signup.firstNamePlaceholder")}
+                    autoComplete="given-name"
+                    {...register("firstName")}
                   />
+                  <FieldError errors={[errors.firstName]} />
                 </Field>
                 <Field>
-                  <FieldLabel htmlFor={`${id}-last-name`}>Last name</FieldLabel>
+                  <FieldLabel htmlFor={`${id}-last-name`}>
+                    {t("auth.signup.lastNameLabel")}
+                  </FieldLabel>
                   <Input
                     id={`${id}-last-name`}
                     type="text"
-                    placeholder="Doe"
-                    required
+                    placeholder={t("auth.signup.lastNamePlaceholder")}
+                    autoComplete="family-name"
+                    {...register("lastName")}
                   />
+                  <FieldError errors={[errors.lastName]} />
                 </Field>
               </div>
               <Field>
-                <FieldLabel htmlFor={`${id}-email`}>Email</FieldLabel>
+                <FieldLabel htmlFor={`${id}-email`}>
+                  {t("auth.signup.emailLabel")}
+                </FieldLabel>
                 <Input
                   id={`${id}-email`}
                   type="email"
-                  placeholder="you@example.com"
-                  required
+                  placeholder={t("auth.signup.emailPlaceholder")}
+                  autoComplete="email"
+                  {...register("email")}
                 />
+                <FieldError errors={[errors.email]} />
               </Field>
               <Field>
-                <FieldLabel htmlFor={`${id}-password`}>Password</FieldLabel>
-                <Input id={`${id}-password`} type="password" required />
+                <FieldLabel htmlFor={`${id}-password`}>
+                  {t("auth.signup.passwordLabel")}
+                </FieldLabel>
+                <div className="relative">
+                  <Input
+                    className="pr-10"
+                    id={`${id}-password`}
+                    type={showPassword ? "text" : "password"}
+                    placeholder={t("auth.signup.passwordPlaceholder")}
+                    autoComplete="new-password"
+                    {...register("password")}
+                  />
+                  <button
+                    className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    aria-label={
+                      showPassword
+                        ? t("auth.signup.hidePassword")
+                        : t("auth.signup.showPassword")
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeOff className="size-4" />
+                    ) : (
+                      <Eye className="size-4" />
+                    )}
+                  </button>
+                </div>
+                <FieldError errors={[errors.password]} />
               </Field>
               <Field>
                 <FieldLabel htmlFor={`${id}-confirm-password`}>
-                  Confirm password
+                  {t("auth.signup.confirmPasswordLabel")}
                 </FieldLabel>
-                <Input id={`${id}-confirm-password`} type="password" required />
-              </Field>
-              <Field>
-                <Button type="submit" className="w-full">
-                  Create account
-                </Button>
-                <p className="text-sm text-muted-foreground">
-                  Already have an account?{" "}
-                  <a
-                    href="/auth/login"
-                    className="underline-offset-4 hover:underline"
+                <div className="relative">
+                  <Input
+                    className="pr-10"
+                    id={`${id}-confirm-password`}
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder={t("auth.signup.passwordPlaceholder")}
+                    autoComplete="new-password"
+                    {...register("confirmPassword")}
+                  />
+                  <button
+                    className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+                    type="button"
+                    onClick={() => setShowConfirmPassword((v) => !v)}
+                    aria-label={
+                      showConfirmPassword
+                        ? t("auth.signup.hidePassword")
+                        : t("auth.signup.showPassword")
+                    }
                   >
-                    Log in
-                  </a>
-                </p>
+                    {showConfirmPassword ? (
+                      <EyeOff className="size-4" />
+                    ) : (
+                      <Eye className="size-4" />
+                    )}
+                  </button>
+                </div>
+                <FieldError errors={[errors.confirmPassword]} />
               </Field>
+              {errors.root && (
+                <Alert variant="destructive" className="max-w-md">
+                  <AlertCircleIcon />
+                  <AlertTitle>{errors.root.message}</AlertTitle>
+                </Alert>
+              )}
+              <Button type="submit" className="w-full" disabled={isPending}>
+                {isPending ? "Creating account…" : t("auth.signup.submit")}
+              </Button>
             </FieldGroup>
           </form>
         </CardContent>
       </Card>
+      <div className="flex items-center gap-2">
+        <p className="text-sm text-muted-foreground">
+          {t("auth.signup.hasAccount")}
+        </p>
+        <Link
+          href="/auth/login"
+          className="rounded-md border px-4 py-2 text-sm font-semibold"
+        >
+          {t("auth.signup.logIn")}
+        </Link>
+      </div>
     </div>
   )
 }

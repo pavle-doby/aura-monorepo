@@ -1,7 +1,7 @@
 import { Montserrat, Geist_Mono } from "next/font/google"
 
-import "@repo/ui/globals.css"
-import { cn } from "@repo/ui/lib/utils"
+import "@repo/ui-web/globals.css"
+import { cn } from "@repo/ui-web/lib/utils"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { ApiClientProvider } from "@repo/api-client"
 import { I18nProvider } from "@repo/i18n/client"

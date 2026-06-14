@@ -7,11 +7,11 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@repo/ui/components/card"
-import { Field, FieldGroup, FieldLabel } from "@repo/ui/components/field"
-import { Input } from "@repo/ui/components/input"
-import { Button } from "@repo/ui/components/button"
-import { cn } from "@repo/ui/lib/utils"
+} from "@repo/ui-web/components/card"
+import { Field, FieldGroup, FieldLabel } from "@repo/ui-web/components/field"
+import { Input } from "@repo/ui-web/components/input"
+import { Button } from "@repo/ui-web/components/button"
+import { cn } from "@repo/ui-web/lib/utils"
 
 export function ForgotForm({
   className,
