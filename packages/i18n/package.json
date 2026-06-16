@@ -30,6 +30,19 @@
     "react-native-locale-detector": "^1.0.0"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "lint-staged": "^17.0.7"
+  },
+  "scripts": {
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "**/*.{md,json}": [
+      "pnpm exec prettier --write"
+    ]
   }
 }

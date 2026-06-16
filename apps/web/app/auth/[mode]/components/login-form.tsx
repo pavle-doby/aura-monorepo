@@ -1,37 +1,37 @@
-"use client"
+"use client";
 
-import { useId, useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { AlertCircleIcon, Eye, EyeOff } from "lucide-react"
-import { useAuthLogin } from "@repo/api-client"
-import { AuthLoginQuerySchema, type AuthLogInUserReq } from "@repo/contract"
-import { useT } from "@repo/i18n/client"
-import { Card, CardContent } from "@repo/ui-web/components/card"
+import { useId, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AlertCircleIcon, Eye, EyeOff } from "lucide-react";
+import { useAuthLogin } from "@repo/api-client";
+import { AuthLoginQuerySchema, type AuthLogInUserReq } from "@repo/contract";
+import { useT } from "@repo/i18n/client";
+import { Card, CardContent } from "@repo/ui-web/components/card";
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@repo/ui-web/components/field"
-import { Input } from "@repo/ui-web/components/input"
-import { Alert, AlertTitle } from "@repo/ui-web/components/alert"
-import { Button } from "@repo/ui-web/components/button"
-import { Separator } from "@repo/ui-web/components/separator"
-import { cn } from "@repo/ui-web/lib/utils"
+} from "@repo/ui-web/components/field";
+import { Input } from "@repo/ui-web/components/input";
+import { Alert, AlertTitle } from "@repo/ui-web/components/alert";
+import { Button } from "@repo/ui-web/components/button";
+import { Separator } from "@repo/ui-web/components/separator";
+import { cn } from "@repo/ui-web/lib/utils";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const id = useId()
-  const router = useRouter()
-  const { t } = useT()
-  const [showPassword, setShowPassword] = useState(false)
+  const id = useId();
+  const router = useRouter();
+  const { t } = useT();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const { mutate: loginMutate, isPending } = useAuthLogin()
+  const { mutate: loginMutate, isPending } = useAuthLogin();
 
   const {
     register,
@@ -40,33 +40,33 @@ export function LoginForm({
     formState: { errors },
   } = useForm<AuthLogInUserReq>({
     resolver: zodResolver(AuthLoginQuerySchema),
-  })
+  });
 
   function onSubmit(data: AuthLogInUserReq) {
     loginMutate(
       { data },
       {
         onSuccess: () => {
-          router.replace("/")
+          router.replace("/");
         },
         onError: (error: unknown) => {
           const axiosError = error as {
-            response?: { data?: { code?: string; message?: string } }
-          }
-          const code = axiosError?.response?.data?.code
+            response?: { data?: { code?: string; message?: string } };
+          };
+          const code = axiosError?.response?.data?.code;
           const message =
             axiosError?.response?.data?.message ??
-            "Login failed. Please try again."
+            "Login failed. Please try again.";
 
           if (code === "unauthorized" || code === "not_found") {
-            setError("email", { message })
-            setError("password", { message })
+            setError("email", { message });
+            setError("password", { message });
           } else {
-            setError("root", { message })
+            setError("root", { message });
           }
         },
       }
-    )
+    );
   }
 
   return (
@@ -159,10 +159,10 @@ export function LoginForm({
         </Link>
       </div>
     </div>
-  )
+  );
 }
 
-// TODO: MOve to some reusable place
+// TODO: Move to some reusable place
 function GoogleIcon() {
   return (
     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -172,5 +172,5 @@ function GoogleIcon() {
         d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
       />
     </svg>
-  )
+  );
 }

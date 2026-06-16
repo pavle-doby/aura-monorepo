@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "db:clean:users": "tsx ./dbCleanUsers.ts",
-    "db:seed:users": "tsx ./dbSeedUsers.ts"
+    "db:seed:users": "tsx ./dbSeedUsers.ts",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@repo/db": "workspace:*",
@@ -13,6 +14,16 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "tsx": "^4.20.6"
+    "tsx": "^4.20.6",
+    "lint-staged": "^17.0.7"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "**/*.{md,json}": [
+      "pnpm exec prettier --write"
+    ]
   }
 }

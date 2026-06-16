@@ -4,7 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint-staged": "lint-staged"
   },
   "exports": {
     "./index.css": "./src/web/index.css",
@@ -35,6 +36,16 @@
     "@react-navigation/native": "^7.0.0",
     "@repo/typescript-config": "workspace:*",
     "@types/react": "^19",
-    "typescript": "^5"
+    "typescript": "^5",
+    "lint-staged": "^17.0.7"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "**/*.{md,json}": [
+      "pnpm exec prettier --write"
+    ]
   }
 }

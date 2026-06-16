@@ -8,7 +8,8 @@
     "ios": "expo start -c --ios",
     "ios:15": "expo run:ios --device 'iPhone 15'",
     "web": "expo start -c --web",
-    "clean": "rm -rf .expo node_modules"
+    "clean": "rm -rf .expo node_modules",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@react-navigation/native": "^7.0.0",
@@ -46,7 +47,17 @@
     "@types/react": "~19.2.10",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "lint-staged": "^17.0.7"
   },
-  "private": true
+  "private": true,
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "**/*.{md,json}": [
+      "pnpm exec prettier --write"
+    ]
+  }
 }

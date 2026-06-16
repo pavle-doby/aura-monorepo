@@ -5,10 +5,12 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsc",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "lint-staged": "lint-staged"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "lint-staged": "^17.0.7"
   },
   "exports": {
     ".": {
@@ -18,5 +20,14 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.44.6"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "**/*.{md,json}": [
+      "pnpm exec prettier --write"
+    ]
   }
 }

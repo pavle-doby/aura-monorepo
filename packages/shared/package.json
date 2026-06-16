@@ -11,7 +11,8 @@
   "sideEffects": false,
   "scripts": {
     "lint": "eslint",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "lint-staged": "lint-staged"
   },
   "peerDependencies": {
     "react": ">=18.0.0"
@@ -22,6 +23,16 @@
     "@types/react": "^19",
     "eslint": "^9",
     "react": "19.2.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "lint-staged": "^17.0.7"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "**/*.{md,json}": [
+      "pnpm exec prettier --write"
+    ]
   }
 }

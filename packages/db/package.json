@@ -9,7 +9,8 @@
   },
   "sideEffects": false,
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@repo/db-schema": "workspace:*",
@@ -20,6 +21,16 @@
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^24.7.2",
-    "drizzle-kit": "^0.31.5"
+    "drizzle-kit": "^0.31.5",
+    "lint-staged": "^17.0.7"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "**/*.{md,json}": [
+      "pnpm exec prettier --write"
+    ]
   }
 }
