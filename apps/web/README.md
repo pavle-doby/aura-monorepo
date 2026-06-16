@@ -22,10 +22,10 @@ pnpm dlx shadcn@latest add [COMPONENT]
 
 **How the CLI splits files:**
 
-| Component type | Destination |
-|---|---|
+| Component type                                     | Destination                   |
+| -------------------------------------------------- | ----------------------------- |
 | Primitives (`button`, `input`, `label`, `card`, …) | `packages/ui/src/components/` |
-| Composed / block components (`login-form`, …) | `apps/web/components/` |
+| Composed / block components (`login-form`, …)      | `apps/web/components/`        |
 
 For example:
 

@@ -9,10 +9,10 @@ import {
   UpdateUserReq,
   UpdateUserRes,
   User,
-} from '@repo/contract';
-import { NotFoundError, ConflictError } from '@repo/contract';
-import { usersRepository } from '../repository/usersRepository';
-import { PaginationReqExtended } from 'api/middleware/pagination';
+} from "@repo/contract";
+import { NotFoundError, ConflictError } from "@repo/contract";
+import { usersRepository } from "../repository/usersRepository";
+import { PaginationReqExtended } from "api/middleware/pagination";
 
 export const usersService = {
   getByEmail: async (email: string): Promise<User> => {

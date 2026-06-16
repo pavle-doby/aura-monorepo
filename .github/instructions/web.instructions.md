@@ -9,12 +9,12 @@ Next.js 16 (App Router), React 19, Tailwind CSS 4, shadcn (radix-nova style). Th
 
 ## Component placement
 
-| Type | Location | Import alias |
-|------|----------|--------------|
-| Primitive / shadcn UI | `packages/ui-web/src/components/` | `@repo/ui-web/components/<name>` |
-| App-specific composed components | `apps/web/components/` | `@/components/<name>` |
-| App-specific hooks | `apps/web/hooks/` | `@/hooks/<name>` |
-| App-specific providers | `apps/web/providers/` | `@/providers/<name>` |
+| Type                             | Location                          | Import alias                     |
+| -------------------------------- | --------------------------------- | -------------------------------- |
+| Primitive / shadcn UI            | `packages/ui-web/src/components/` | `@repo/ui-web/components/<name>` |
+| App-specific composed components | `apps/web/components/`            | `@/components/<name>`            |
+| App-specific hooks               | `apps/web/hooks/`                 | `@/hooks/<name>`                 |
+| App-specific providers           | `apps/web/providers/`             | `@/providers/<name>`             |
 
 Never define reusable primitives inline in the web app — add them to `@repo/ui-web`.
 
@@ -39,7 +39,7 @@ export default async function ProfilePage() {
 }
 
 // Client component — needed for hooks / interactivity
-"use client";
+("use client");
 export function ProfileCard() {
   const { data } = useGetUserSelf();
   return <div>{data?.name}</div>;
@@ -101,7 +101,7 @@ Use `lucide-react` only. Size with Tailwind (`size-4`, `size-5`).
 
 ```tsx
 import { ChevronDown } from "lucide-react";
-<ChevronDown className="size-4" />
+<ChevronDown className="size-4" />;
 ```
 
 ## Adding a new page
@@ -115,28 +115,29 @@ import { ChevronDown } from "lucide-react";
 
 The three root providers are already wired in `app/layout.tsx` — do not duplicate them:
 
-| Provider | Source | Purpose |
-|----------|--------|---------|
-| `I18nProvider` | `@repo/i18n/client` | i18next context |
-| `ApiClientProvider` | `@repo/api-client` | React Query client |
-| `ThemeProvider` | `@/providers/theme-provider` | dark/light mode |
+| Provider            | Source                       | Purpose            |
+| ------------------- | ---------------------------- | ------------------ |
+| `I18nProvider`      | `@repo/i18n/client`          | i18next context    |
+| `ApiClientProvider` | `@repo/api-client`           | React Query client |
+| `ThemeProvider`     | `@/providers/theme-provider` | dark/light mode    |
 
 Add new providers by wrapping inside the existing provider tree in `layout.tsx`.
 
 ## Import aliases
 
-| Alias | Resolves to |
-|-------|-------------|
-| `@/*` | `apps/web/*` |
-| `@repo/ui-web/*` | `packages/ui-web/src/*` |
+| Alias              | Resolves to               |
+| ------------------ | ------------------------- |
+| `@/*`              | `apps/web/*`              |
+| `@repo/ui-web/*`   | `packages/ui-web/src/*`   |
 | `@repo/api-client` | `packages/api-client/src` |
-| `@repo/i18n/*` | `packages/i18n/src/*` |
-| `@repo/contract` | `packages/contract/src` |
+| `@repo/i18n/*`     | `packages/i18n/src/*`     |
+| `@repo/contract`   | `packages/contract/src`   |
 
 Never use relative paths (`../../`) to cross package boundaries.
 
 ## shadcn CLI
 
 When running `npx shadcn add <component>` from `apps/web`:
+
 - **Primitive components** are installed into `packages/ui/src/components/` (configured via `aliases.ui`).
 - **Composed/block components** (e.g., `login-form`) are installed into `apps/web/components/` (configured via `aliases.components`).

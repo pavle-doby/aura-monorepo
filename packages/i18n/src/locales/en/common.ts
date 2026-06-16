@@ -5,4 +5,4 @@ export const common = {
     sr: "SR",
     en: "EN",
   },
-}
+};

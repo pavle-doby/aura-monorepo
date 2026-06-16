@@ -1,6 +1,6 @@
-import type { I18nConfig } from 'next-i18next/proxy';
-import { DEFAULT_LOCALE, LOCALES } from './constants';
-import { baseConfig } from './config.base';
+import type { I18nConfig } from "next-i18next/proxy";
+import { DEFAULT_LOCALE, LOCALES } from "./constants";
+import { baseConfig } from "./config.base";
 
 const webConfig: I18nConfig = {
   defaultNS: baseConfig.defaultNS,
@@ -11,7 +11,7 @@ const webConfig: I18nConfig = {
   resourceLoader: (language, _namespace) =>
     import(`./locales/${language}/index`).then((m) => m.default),
   // Disable caching in dev so HMR changes to locale files are reflected immediately
-  ...(process.env.NODE_ENV === 'development' && { cache: false }),
+  ...(process.env.NODE_ENV === "development" && { cache: false }),
 };
 
 export default webConfig;

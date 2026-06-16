@@ -1,7 +1,7 @@
-import type { Request, Response, NextFunction } from 'express';
-import { ForbiddenError } from '@repo/contract';
-import { usersService } from 'api/modules/users/services/usersService';
-import type { UserRole } from '@repo/contract';
+import type { Request, Response, NextFunction } from "express";
+import { ForbiddenError } from "@repo/contract";
+import { usersService } from "api/modules/users/services/usersService";
+import type { UserRole } from "@repo/contract";
 
 /**
  * Middleware to validate user role
@@ -32,9 +32,9 @@ export function validateRole(requiredRoles: UserRole[]) {
 /**
  * Convenience middleware to validate admin role only
  */
-export const validateAdminRole = () => validateRole(['admin']);
+export const validateAdminRole = () => validateRole(["admin"]);
 
 /**
  * Convenience middleware to validate user or admin role
  */
-export const validateUserRole = () => validateRole(['user', 'admin']);
+export const validateUserRole = () => validateRole(["user", "admin"]);

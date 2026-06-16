@@ -15,8 +15,7 @@ import { PaginationReqExtended } from "api/middleware/pagination";
 
 export const usersController = {
   getSelf: async (res: Response): Promise<void> => {
-    const email: string =
-      res.locals?.user?.email || "iampavle.test+1@gmail.com";
+    const email: string = res.locals?.user?.email || "iampavle.test+1@gmail.com";
     const user: User = await usersService.getByEmail(email);
     res.json(user);
   },
@@ -29,8 +28,7 @@ export const usersController = {
       requiresFileUpload: res.locals.query.requiresFileUpload,
     };
 
-    const users: GetAllUsersRes =
-      await usersService.getAllUsersWithProfiles(dto);
+    const users: GetAllUsersRes = await usersService.getAllUsersWithProfiles(dto);
     res.status(200).json(users);
   },
 

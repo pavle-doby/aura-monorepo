@@ -22,7 +22,7 @@ packages/contract/src/<feature>/
 After adding a new feature, re-export it from `packages/contract/src/index.ts`:
 
 ```ts
-export * from './<feature>';
+export * from "./<feature>";
 ```
 
 ## Schema derivation — always use drizzle-zod for DB-backed entities
@@ -30,8 +30,8 @@ export * from './<feature>';
 Derive from the Drizzle table in `@repo/db-schema`. Never write field definitions by hand when a table exists.
 
 ```ts
-import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-zod';
-import { users } from '@repo/db-schema';
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
+import { users } from "@repo/db-schema";
 
 // SELECT shape — omit internal/audit timestamps
 export const UserSchema = createSelectSchema(users).omit({
@@ -82,8 +82,8 @@ Define a `ErrorCode<Feature>` enum in `errors.ts`. Values use a `<feature>_` pre
 ```ts
 // packages/contract/src/users/errors.ts
 export enum ErrorCodeUser {
-  NOT_FOUND     = 'user_not_found',
-  ALREADY_EXISTS = 'user_already_exists',
+  NOT_FOUND = "user_not_found",
+  ALREADY_EXISTS = "user_already_exists",
 }
 ```
 
@@ -94,17 +94,17 @@ Global/cross-cutting codes live in `packages/contract/src/shared/errors/ErrorCod
 Each feature `index.ts` re-exports all three files:
 
 ```ts
-export * from './schemas';
-export * from './types';
-export * from './errors';
+export * from "./schemas";
+export * from "./types";
+export * from "./errors";
 ```
 
 `shared/index.ts` re-exports its subdirectories:
 
 ```ts
-export * from './types';
-export * from './schemas';
-export * from './errors';
+export * from "./types";
+export * from "./schemas";
+export * from "./errors";
 ```
 
 ## Shared utilities

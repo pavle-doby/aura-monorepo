@@ -1,9 +1,9 @@
-import type { ZodType } from 'zod';
-import type { Request, Response, NextFunction } from 'express';
-import { ErrorCode } from '@repo/contract';
-import { BadRequestError } from '@repo/contract';
+import type { ZodType } from "zod";
+import type { Request, Response, NextFunction } from "express";
+import { ErrorCode } from "@repo/contract";
+import { BadRequestError } from "@repo/contract";
 
-type SourceType = 'body' | 'query' | 'params';
+type SourceType = "body" | "query" | "params";
 
 /**
  * Validate request data using a Zod schema.
@@ -15,7 +15,7 @@ type SourceType = 'body' | 'query' | 'params';
  * res.locals.params
  * ```
  */
-export function validate(schema: ZodType, source: SourceType = 'body') {
+export function validate(schema: ZodType, source: SourceType = "body") {
   return (req: Request, res: Response, next: NextFunction) => {
     const result = schema.safeParse(req[source]);
 

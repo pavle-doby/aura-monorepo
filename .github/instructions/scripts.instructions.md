@@ -26,13 +26,13 @@ packages/scripts/
 Always import `client`, `db`, and `schema` together from `@repo/db`:
 
 ```ts
-import { client, db, schema } from '@repo/db';
+import { client, db, schema } from "@repo/db";
 ```
 
 Import Drizzle operator helpers (`eq`, `inArray`, `and`, etc.) from `drizzle-orm` directly — never from `@repo/db`:
 
 ```ts
-import { inArray } from 'drizzle-orm';
+import { inArray } from "drizzle-orm";
 ```
 
 Never import table definitions directly from `@repo/db-schema` — use `schema.<table>` via `@repo/db`.
@@ -59,6 +59,7 @@ async function <actionTarget>() {
 ```
 
 Two rules that are never skipped:
+
 1. **`client.end()` in `finally`** — the postgres.js connection must be explicitly closed or the process hangs.
 2. **`process.exitCode = 1` on error, not `process.exit(1)`** — `process.exit()` would skip the `finally` block and leave the connection open.
 
@@ -68,7 +69,12 @@ Use `$inferInsert` to type mock/seed data arrays against the live schema — no 
 
 ```ts
 const mockUsers: Array<typeof schema.users.$inferInsert> = [
-  { email: 'test@example.com', firstName: 'Test', role: 'user', status: 'approved' },
+  {
+    email: "test@example.com",
+    firstName: "Test",
+    role: "user",
+    status: "approved",
+  },
 ];
 ```
 
@@ -77,10 +83,7 @@ const mockUsers: Array<typeof schema.users.$inferInsert> = [
 Seed scripts must be safe to run multiple times. Use `onConflictDoNothing` targeting the natural unique key:
 
 ```ts
-await db
-  .insert(schema.users)
-  .values(mockUsers)
-  .onConflictDoNothing({ target: schema.users.email });
+await db.insert(schema.users).values(mockUsers).onConflictDoNothing({ target: schema.users.email });
 ```
 
 ## Returning Feedback
@@ -105,6 +108,7 @@ console.log(`Deleted ${deleted.length} user(s).`);
    ```
 
 Run from the monorepo root with:
+
 ```bash
 pnpm db:<action>:<target>
 ```

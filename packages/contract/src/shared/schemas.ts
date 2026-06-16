@@ -1,4 +1,4 @@
-import z from 'zod';
+import z from "zod";
 
 export const PaginationSchema = z.object({
   total: z.number(),
@@ -9,7 +9,7 @@ export const PaginationSchema = z.object({
 export const paramBoolean = () =>
   z
     .string()
-    .transform((val) => val === 'true')
+    .transform((val) => val === "true")
     .pipe(z.boolean());
 
 export const isoDatetime = () => z.iso.datetime().transform((date) => new Date(date));

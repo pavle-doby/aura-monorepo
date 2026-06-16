@@ -19,12 +19,12 @@ packages/ui-theme/
 
 ## Entry Points
 
-| Import path                   | Contents                                              |
-| ----------------------------- | ----------------------------------------------------- |
-| `@repo/ui-theme`              | Everything — native + web TypeScript exports          |
-| `@repo/ui-theme/native`       | Native-only: `THEME`, `NAV_THEME`, `THEME_NATIVE`     |
-| `@repo/ui-theme/web`          | Web-only: `THEME_WEB`, `applyThemeVars`               |
-| `@repo/ui-theme/index.css`    | Tailwind v4 CSS variables (`@theme inline`, `:root`, `.dark`) |
+| Import path                | Contents                                                      |
+| -------------------------- | ------------------------------------------------------------- |
+| `@repo/ui-theme`           | Everything — native + web TypeScript exports                  |
+| `@repo/ui-theme/native`    | Native-only: `THEME`, `NAV_THEME`, `THEME_NATIVE`             |
+| `@repo/ui-theme/web`       | Web-only: `THEME_WEB`, `applyThemeVars`                       |
+| `@repo/ui-theme/index.css` | Tailwind v4 CSS variables (`@theme inline`, `:root`, `.dark`) |
 
 ## How tokens are derived
 

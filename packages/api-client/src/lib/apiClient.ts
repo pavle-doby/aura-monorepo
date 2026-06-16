@@ -1,8 +1,8 @@
-import Axios, { type AxiosRequestConfig } from 'axios';
-import { env } from '../env';
+import Axios, { type AxiosRequestConfig } from "axios";
+import { env } from "../env";
 
 export const apiClient = Axios.create({
-  baseURL: env.API_URL ?? 'http://localhost:7007/api',
+  baseURL: env.API_URL ?? "http://localhost:7007/api",
   withCredentials: true,
 });
 
@@ -16,7 +16,10 @@ let refreshFn: (() => Promise<{ accessToken: string; refreshToken: string } | nu
  */
 export const configureTokenProviders = (opts: {
   getToken: () => Promise<string | null>;
-  onRefresh: () => Promise<{ accessToken: string; refreshToken: string } | null>;
+  onRefresh: () => Promise<{
+    accessToken: string;
+    refreshToken: string;
+  } | null>;
 }) => {
   getTokenFn = opts.getToken;
   refreshFn = opts.onRefresh;
@@ -34,7 +37,7 @@ apiClient.interceptors.request.use(async (config) => {
 });
 
 apiClient.interceptors.response.use(null, async (error) => {
-  const isRefreshEndpoint = error.config?.url?.includes('/auth/refresh');
+  const isRefreshEndpoint = error.config?.url?.includes("/auth/refresh");
   if (error.response?.status === 401 && !error.config._retry && !isRefreshEndpoint) {
     error.config._retry = true;
     try {
@@ -46,7 +49,7 @@ apiClient.interceptors.response.use(null, async (error) => {
         }
       } else {
         // Web: refresh via cookie
-        await apiClient.post('/v1/auth/refresh');
+        await apiClient.post("/v1/auth/refresh");
       }
       return apiClient(error.config);
     } catch {
@@ -73,7 +76,7 @@ export const customInstance = <T>(
 
   // @ts-expect-error — attach cancel to the promise so Orval can abort
   promise.cancel = () => {
-    source.cancel('Query was cancelled');
+    source.cancel("Query was cancelled");
   };
 
   return promise;

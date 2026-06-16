@@ -1,4 +1,4 @@
-import { ApiError, ApiErrorProps } from './ApiError';
+import { ApiError, ApiErrorProps } from "./ApiError";
 
 /**
  * Too Many Requests Error - HTTP Status `429`
@@ -8,7 +8,7 @@ export class TooManyRequestsError extends ApiError {
     super({
       ...error,
       status: 429,
-      code: error.code || 'too_many_requests',
+      code: error.code || "too_many_requests",
     });
   }
 }

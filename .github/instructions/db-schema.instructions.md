@@ -26,16 +26,16 @@ src/
 
 ## Naming Conventions
 
-| Thing | Convention | Example |
-|---|---|---|
-| Table variable | camelCase plural | `fileUploads`, `users` |
-| SQL table name string | snake_case plural | `'file_uploads'`, `'users'` |
-| Column variable (JS key) | camelCase | `firstName`, `createdAt` |
-| SQL column name string | snake_case | `'first_name'`, `'created_at'` |
-| File name | kebab-case | `file-uploads.ts` |
-| pgEnum variable | camelCase + `Enum` suffix | `userRoleEnum`, `userStatusEnum` |
-| SQL enum name string | snake_case | `'user_role'`, `'user_status'` |
-| Entity type | PascalCase + `Entity` suffix | `UserEntity`, `FileUploadEntity` |
+| Thing                    | Convention                   | Example                          |
+| ------------------------ | ---------------------------- | -------------------------------- |
+| Table variable           | camelCase plural             | `fileUploads`, `users`           |
+| SQL table name string    | snake_case plural            | `'file_uploads'`, `'users'`      |
+| Column variable (JS key) | camelCase                    | `firstName`, `createdAt`         |
+| SQL column name string   | snake_case                   | `'first_name'`, `'created_at'`   |
+| File name                | kebab-case                   | `file-uploads.ts`                |
+| pgEnum variable          | camelCase + `Enum` suffix    | `userRoleEnum`, `userStatusEnum` |
+| SQL enum name string     | snake_case                   | `'user_role'`, `'user_status'`   |
+| Entity type              | PascalCase + `Entity` suffix | `UserEntity`, `FileUploadEntity` |
 
 ## Standard Columns
 
@@ -53,9 +53,9 @@ updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(
 ## Enums (`src/schemas/enums.ts`)
 
 ```ts
-import { pgEnum } from 'drizzle-orm/pg-core';
+import { pgEnum } from "drizzle-orm/pg-core";
 
-export const userRoleEnum = pgEnum('user_role', ['user', 'admin']);
+export const userRoleEnum = pgEnum("user_role", ["user", "admin"]);
 ```
 
 - Import enums into table files from `./enums`, not from `@repo/db-schema` (avoid circular imports).
@@ -78,8 +78,8 @@ Always choose `'cascade'`, `'set null'`, or `'restrict'` intentionally — never
 Add an `InferSelectModel` type for every table:
 
 ```ts
-import type { InferSelectModel } from 'drizzle-orm';
-import type { fileUploads, users } from './schemas';
+import type { InferSelectModel } from "drizzle-orm";
+import type { fileUploads, users } from "./schemas";
 
 export type UserEntity = InferSelectModel<typeof users>;
 export type FileUploadEntity = InferSelectModel<typeof fileUploads>;

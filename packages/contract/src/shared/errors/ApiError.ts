@@ -11,10 +11,12 @@ export class ApiError {
 
   constructor(error: ApiError) {
     this.status = error.status || 500;
-    this.code = error.code || 'server_error';
+    this.code = error.code || "server_error";
     this.error = error.error;
     this.details = error.details;
   }
 }
 
-export type ApiErrorProps = Omit<ApiError, 'status' | 'code'> & { code?: string };
+export type ApiErrorProps = Omit<ApiError, "status" | "code"> & {
+  code?: string;
+};

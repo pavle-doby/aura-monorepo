@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
-dotenv.config({ path: ['.env', '.env.local'] });
+dotenv.config({ path: [".env", ".env.local"] });
 
 export const env = process.env as {
   SERVER_PORT: string;
@@ -8,6 +8,6 @@ export const env = process.env as {
   SUPABASE_API_KEY: string;
   DATABASE_URL: string;
   CORS_ENABLED_URL: string;
-  NODE_ENV: 'development' | 'production' | 'test';
+  NODE_ENV: "development" | "production" | "test";
   MIN_LOG_LEVEL: string;
 };

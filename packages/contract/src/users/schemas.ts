@@ -1,7 +1,7 @@
-import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-zod';
-import { z } from 'zod';
-import { users } from '@repo/db-schema';
-import { userRoleEnum, userStatusEnum } from '@repo/db-schema';
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
+import { z } from "zod";
+import { users } from "@repo/db-schema";
+import { userRoleEnum, userStatusEnum } from "@repo/db-schema";
 
 export const UserSchema = createSelectSchema(users).omit({
   createdAt: true,

@@ -9,13 +9,13 @@ Expo 55, React Native 0.83, Expo Router, NativeWind 4. The app is intentionally 
 
 ## Component placement
 
-| Type | Location | Import alias |
-|------|----------|--------------|
-| Shared primitive / ui-native components | `packages/ui-native/src/components/` | `@repo/ui-native/components/<name>` |
-| App-specific composed screens / components | `apps/native/components/` | `@/components/<name>` |
-| App-specific hooks | `apps/native/lib/` or `apps/native/hooks/` | `@/lib/<name>` / `@/hooks/<name>` |
-| Theme re-exports | `apps/native/lib/theme.ts` | `@/lib/theme` |
-| `cn()` utility | `apps/native/lib/utils.ts` | `@/lib/utils` |
+| Type                                       | Location                                   | Import alias                        |
+| ------------------------------------------ | ------------------------------------------ | ----------------------------------- |
+| Shared primitive / ui-native components    | `packages/ui-native/src/components/`       | `@repo/ui-native/components/<name>` |
+| App-specific composed screens / components | `apps/native/components/`                  | `@/components/<name>`               |
+| App-specific hooks                         | `apps/native/lib/` or `apps/native/hooks/` | `@/lib/<name>` / `@/hooks/<name>`   |
+| Theme re-exports                           | `apps/native/lib/theme.ts`                 | `@/lib/theme`                       |
+| `cn()` utility                             | `apps/native/lib/utils.ts`                 | `@/lib/utils`                       |
 
 Never define reusable primitive components inline in the app — add them to `@repo/ui-native`.
 
@@ -32,14 +32,14 @@ function Button({ children }: { children: React.ReactNode }) { ... }
 
 Screens live in `apps/native/app/`. Expo Router uses file-based routing:
 
-| File | Purpose |
-|------|---------|
-| `app/_layout.tsx` | Root layout — providers, `<Stack />`, `<PortalHost />` |
-| `app/index.tsx` | Default route (`/`) |
-| `app/+not-found.tsx` | 404 fallback |
-| `app/+html.tsx` | Web-only HTML shell (do not edit for native logic) |
-| `app/(tabs)/_layout.tsx` | Tab navigator layout (route group, no URL segment) |
-| `app/(auth)/login.tsx` | Auth screen under a route group |
+| File                     | Purpose                                                |
+| ------------------------ | ------------------------------------------------------ |
+| `app/_layout.tsx`        | Root layout — providers, `<Stack />`, `<PortalHost />` |
+| `app/index.tsx`          | Default route (`/`)                                    |
+| `app/+not-found.tsx`     | 404 fallback                                           |
+| `app/+html.tsx`          | Web-only HTML shell (do not edit for native logic)     |
+| `app/(tabs)/_layout.tsx` | Tab navigator layout (route group, no URL segment)     |
+| `app/(auth)/login.tsx`   | Auth screen under a route group                        |
 
 Use **route groups** `(group)/` to share layouts without adding a URL segment.
 
@@ -91,7 +91,7 @@ Use `lucide-react-native` only (not `lucide-react`). Size with NativeWind (`clas
 import { Icon } from "@repo/ui-native/components/icon";
 import { SunIcon } from "lucide-react-native";
 
-<Icon as={SunIcon} className="size-5 text-foreground" />
+<Icon as={SunIcon} className="size-5 text-foreground" />;
 ```
 
 ## API calls — use generated hooks inside a QueryClientProvider
@@ -104,7 +104,7 @@ import { ApiClientProvider } from "@repo/api-client";
 
 <ApiClientProvider>
   <Stack />
-</ApiClientProvider>
+</ApiClientProvider>;
 
 // Screen
 import { useGetUserSelf } from "@repo/api-client";
@@ -124,7 +124,7 @@ import { I18nProvider } from "@repo/i18n";
 
 <I18nProvider>
   <Stack />
-</I18nProvider>
+</I18nProvider>;
 
 // Screen
 import { useT } from "@repo/i18n";
@@ -153,14 +153,14 @@ router.push("/profile");
 
 ## Import aliases
 
-| Alias | Resolves to |
-|-------|-------------|
-| `@/*` | `apps/native/*` |
+| Alias               | Resolves to                |
+| ------------------- | -------------------------- |
+| `@/*`               | `apps/native/*`            |
 | `@repo/ui-native/*` | `packages/ui-native/src/*` |
-| `@repo/ui-theme/*` | `packages/ui-theme/src/*` |
-| `@repo/api-client` | `packages/api-client/src` |
-| `@repo/i18n` | `packages/i18n/src` |
-| `@repo/contract` | `packages/contract/src` |
+| `@repo/ui-theme/*`  | `packages/ui-theme/src/*`  |
+| `@repo/api-client`  | `packages/api-client/src`  |
+| `@repo/i18n`        | `packages/i18n/src`        |
+| `@repo/contract`    | `packages/contract/src`    |
 
 Never use relative paths (`../../`) to cross package boundaries.
 

@@ -1,10 +1,10 @@
-import { z } from 'zod';
-import { User } from '../users';
+import { z } from "zod";
+import { User } from "../users";
 import {
   AuthLoginQuerySchema,
   AuthNativeRefreshQuerySchema,
   AuthSignUpQuerySchema,
-} from './schemas';
+} from "./schemas";
 
 export type AuthSignUpUserReq = z.infer<typeof AuthSignUpQuerySchema>;
 export type AuthSignUpUserRes = User;

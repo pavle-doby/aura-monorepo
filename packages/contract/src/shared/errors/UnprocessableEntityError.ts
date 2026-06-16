@@ -1,5 +1,5 @@
-import { ErrorCode } from './ErrorCode';
-import { ApiError, ApiErrorProps } from './ApiError';
+import { ErrorCode } from "./ErrorCode";
+import { ApiError, ApiErrorProps } from "./ApiError";
 
 /**
  * Unprocessable Entity Error - HTTP Status `422`

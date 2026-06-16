@@ -1,5 +1,5 @@
-import type { Response } from 'express';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from './consts';
+import type { Response } from "express";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "./consts";
 
 export const setAuthTokens = ({
   res,

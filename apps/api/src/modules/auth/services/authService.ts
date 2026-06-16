@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 import {
   ErrorCodeAuth,
   ErrorCode,
@@ -10,7 +10,7 @@ import {
   AuthNativeLogInUserRes,
   AuthNativeRefreshTokenReq,
   AuthNativeRefreshTokenRes,
-} from '@repo/contract';
+} from "@repo/contract";
 import {
   BadRequestError,
   ConflictError,
@@ -18,11 +18,11 @@ import {
   UnauthorizedError,
   InternalServerError,
   TooManyRequestsError,
-} from '@repo/contract';
-import { supabase } from 'api/utils/supabase';
-import { authRepository } from '../repository/authRepository';
-import { CreateUser } from '../repository/types';
-import { setAuthTokens } from '../utils/setAuthTokens';
+} from "@repo/contract";
+import { supabase } from "api/utils/supabase";
+import { authRepository } from "../repository/authRepository";
+import { CreateUser } from "../repository/types";
+import { setAuthTokens } from "../utils/setAuthTokens";
 
 export const authService = {
   signUp: async ({
@@ -56,8 +56,8 @@ export const authService = {
       email: dto.email,
       firstName: dto.firstName,
       lastName: dto.lastName,
-      role: 'user',
-      status: 'pending',
+      role: "user",
+      status: "pending",
     };
 
     const existingUser = await authRepository.getUserByEmail(dto.email);
@@ -147,8 +147,8 @@ export const authService = {
     }
 
     // Clear cookies
-    res.clearCookie('access_token');
-    res.clearCookie('refresh_token');
+    res.clearCookie("access_token");
+    res.clearCookie("refresh_token");
 
     return;
   },
@@ -171,8 +171,8 @@ export const authService = {
 
       if (error) {
         // Clear invalid cookies
-        res.clearCookie('access_token');
-        res.clearCookie('refresh_token');
+        res.clearCookie("access_token");
+        res.clearCookie("refresh_token");
 
         throw new UnauthorizedError({
           code: ErrorCodeAuth.INVALID_REFRESH_TOKEN,
@@ -189,11 +189,11 @@ export const authService = {
 
       return;
     } catch (error) {
-      console.error('Refresh token error:', error);
+      console.error("Refresh token error:", error);
 
       // Clear cookies on unexpected error
-      res.clearCookie('access_token');
-      res.clearCookie('refresh_token');
+      res.clearCookie("access_token");
+      res.clearCookie("refresh_token");
 
       throw new InternalServerError({
         code: ErrorCode.SERVER_ERROR,
@@ -201,11 +201,7 @@ export const authService = {
     }
   },
 
-  signUpNative: async ({
-    dto,
-  }: {
-    dto: AuthSignUpUserReq;
-  }): Promise<AuthNativeSignUpUserRes> => {
+  signUpNative: async ({ dto }: { dto: AuthSignUpUserReq }): Promise<AuthNativeSignUpUserRes> => {
     const { data, error } = await supabase.auth.signUp({
       email: dto.email,
       password: dto.password,
@@ -237,8 +233,8 @@ export const authService = {
       email: dto.email,
       firstName: dto.firstName,
       lastName: dto.lastName,
-      role: 'user',
-      status: 'pending',
+      role: "user",
+      status: "pending",
     });
 
     const user: AuthSignUpUserRes = {
@@ -253,16 +249,12 @@ export const authService = {
 
     return {
       user,
-      accessToken: data.session?.access_token ?? '',
-      refreshToken: data.session?.refresh_token ?? '',
+      accessToken: data.session?.access_token ?? "",
+      refreshToken: data.session?.refresh_token ?? "",
     };
   },
 
-  logInNative: async ({
-    dto,
-  }: {
-    dto: AuthLogInUserReq;
-  }): Promise<AuthNativeLogInUserRes> => {
+  logInNative: async ({ dto }: { dto: AuthLogInUserReq }): Promise<AuthNativeLogInUserRes> => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: dto.email,
       password: dto.password,
@@ -295,14 +287,14 @@ export const authService = {
 
     return {
       user,
-      accessToken: data.session?.access_token ?? '',
-      refreshToken: data.session?.refresh_token ?? '',
+      accessToken: data.session?.access_token ?? "",
+      refreshToken: data.session?.refresh_token ?? "",
     };
   },
 
   signOutNative: async ({ req }: { req: Request }) => {
     const authHeader = req.headers.authorization;
-    if (authHeader?.startsWith('Bearer ')) {
+    if (authHeader?.startsWith("Bearer ")) {
       await supabase.auth.signOut();
     }
     return;
@@ -325,8 +317,8 @@ export const authService = {
     }
 
     return {
-      accessToken: data.session?.access_token ?? '',
-      refreshToken: data.session?.refresh_token ?? '',
+      accessToken: data.session?.access_token ?? "",
+      refreshToken: data.session?.refresh_token ?? "",
     };
   },
 };

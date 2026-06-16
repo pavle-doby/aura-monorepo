@@ -1,7 +1,7 @@
-import type { Request, Response, NextFunction } from 'express';
-import { UnauthorizedError, InternalServerError } from '@repo/contract';
-import { supabase } from 'api/utils/supabase';
-import { ErrorCode } from '@repo/contract';
+import type { Request, Response, NextFunction } from "express";
+import { UnauthorizedError, InternalServerError } from "@repo/contract";
+import { supabase } from "api/utils/supabase";
+import { ErrorCode } from "@repo/contract";
 
 /**
  * Checks if Supabase `token` is valid and user is authenticated
@@ -15,7 +15,7 @@ export async function handleAuth(req: Request, res: Response, next: NextFunction
 
     // Get token from Authorization header (for mobile)
     const tokenHeaderFull = req.headers.authorization;
-    const tokenHeader = tokenHeaderFull?.startsWith('Bearer ')
+    const tokenHeader = tokenHeaderFull?.startsWith("Bearer ")
       ? tokenHeaderFull.slice(7)
       : undefined;
 

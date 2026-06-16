@@ -76,7 +76,7 @@ export const usersRepository = {
 Always use typed error classes from `@repo/contract`. Never `res.status(400).json(...)` directly.
 
 ```ts
-import { NotFoundError, ConflictError, BadRequestError } from '@repo/contract';
+import { NotFoundError, ConflictError, BadRequestError } from "@repo/contract";
 
 throw new NotFoundError({ code: ErrorCodeUser.NOT_FOUND });
 ```
@@ -87,12 +87,14 @@ For feature-specific codes, define an `ErrorCodeXxx` enum in `packages/contract/
 
 ```ts
 router.get(
-  '/:id',
-  handleAuth,           // 1. auth (if protected)
-  validateAdminRole(),  // 2. role check (if needed)
-  validate(ParamsIdSchema, 'params'), // 3. input validation
-  pagination(),         // 4. pagination (list routes only)
-  async (_req, res) => { await controller.method(res); }
+  "/:id",
+  handleAuth, // 1. auth (if protected)
+  validateAdminRole(), // 2. role check (if needed)
+  validate(ParamsIdSchema, "params"), // 3. input validation
+  pagination(), // 4. pagination (list routes only)
+  async (_req, res) => {
+    await controller.method(res);
+  }
 );
 ```
 
@@ -111,21 +113,30 @@ Apply the `pagination()` middleware on list endpoints. It reads `page` (0-based)
 Register paths in `apps/api/src/modules/<feature>/openapi/<feature>.ts` via `registry.registerPath()`. These are **not decorators** — they are plain side-effect calls:
 
 ```ts
-import { registry } from 'api/openapi/registry';
-import { ApiErrorSchema, UserPostQuerySchema } from '@repo/contract';
-import { UserSchema } from 'api/openapi/schemas';
+import { registry } from "api/openapi/registry";
+import { ApiErrorSchema, UserPostQuerySchema } from "@repo/contract";
+import { UserSchema } from "api/openapi/schemas";
 
 registry.registerPath({
-  method: 'post',
-  path: '/v1/users',
-  operationId: 'usersCreate',
-  tags: ['Users'],
+  method: "post",
+  path: "/v1/users",
+  operationId: "usersCreate",
+  tags: ["Users"],
   request: {
-    body: { content: { 'application/json': { schema: UserPostQuerySchema } }, required: true },
+    body: {
+      content: { "application/json": { schema: UserPostQuerySchema } },
+      required: true,
+    },
   },
   responses: {
-    201: { description: 'Created', content: { 'application/json': { schema: UserSchema } } },
-    default: { description: 'Error', content: { 'application/json': { schema: ApiErrorSchema } } },
+    201: {
+      description: "Created",
+      content: { "application/json": { schema: UserSchema } },
+    },
+    default: {
+      description: "Error",
+      content: { "application/json": { schema: ApiErrorSchema } },
+    },
   },
 });
 ```

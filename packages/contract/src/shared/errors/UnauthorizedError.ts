@@ -1,5 +1,5 @@
-import { ErrorCode } from './ErrorCode';
-import { ApiError, ApiErrorProps } from './ApiError';
+import { ErrorCode } from "./ErrorCode";
+import { ApiError, ApiErrorProps } from "./ApiError";
 
 /**
  * Unauthorized Error - HTTP Status `401`

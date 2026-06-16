@@ -1,5 +1,5 @@
-import { ErrorCode } from './ErrorCode';
-import { ApiError, ApiErrorProps } from './ApiError';
+import { ErrorCode } from "./ErrorCode";
+import { ApiError, ApiErrorProps } from "./ApiError";
 
 /**
  * Not Found Error - HTTP Status `404`

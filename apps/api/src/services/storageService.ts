@@ -1,5 +1,5 @@
-import { BadRequestError, InternalServerError, NotFoundError } from '@repo/contract';
-import { supabase } from '../utils/supabase';
+import { BadRequestError, InternalServerError, NotFoundError } from "@repo/contract";
+import { supabase } from "../utils/supabase";
 
 export interface UploadFileOptions {
   bucketName: string;
@@ -66,7 +66,7 @@ export const storageService = {
 
     if (!data) {
       throw new InternalServerError({
-        error: new Error('Upload succeeded but no data returned'),
+        error: new Error("Upload succeeded but no data returned"),
       });
     }
 
@@ -96,7 +96,7 @@ export const storageService = {
     const { data, error } = await supabase.storage.from(bucketName).download(fileName);
 
     if (error) {
-      if (error.message.includes('not found') || error.message.includes('does not exist')) {
+      if (error.message.includes("not found") || error.message.includes("does not exist")) {
         throw new NotFoundError({
           error: new Error(`File not found: ${fileName}`),
           details: { originalError: error.message },
@@ -122,7 +122,7 @@ export const storageService = {
    */
   async deleteFile(options: DeleteFileOptions): Promise<void> {
     const { bucketName, fileName, path } = options;
-    const folder = path ? `${path}/` : '';
+    const folder = path ? `${path}/` : "";
     const name = `${folder}${fileName}`;
 
     const { error } = await supabase.storage.from(bucketName).remove([name]);
@@ -139,7 +139,7 @@ export const storageService = {
    * List files in a bucket
    */
   async listFiles(options: ListFilesOptions): Promise<FileInfo[]> {
-    const { bucketName, folder = '', limit = 100, offset = 0 } = options;
+    const { bucketName, folder = "", limit = 100, offset = 0 } = options;
 
     const { data, error } = await supabase.storage.from(bucketName).list(folder, {
       limit,
@@ -171,8 +171,8 @@ export const storageService = {
   async fileExists(bucketName: string, fileName: string): Promise<boolean> {
     const { data, error } = await supabase.storage
       .from(bucketName)
-      .list(fileName.split('/').slice(0, -1).join('/'), {
-        search: fileName.split('/').pop(),
+      .list(fileName.split("/").slice(0, -1).join("/"), {
+        search: fileName.split("/").pop(),
       });
 
     if (error) {
@@ -186,8 +186,8 @@ export const storageService = {
    * Get file metadata
    */
   async getFileInfo(bucketName: string, fileName: string): Promise<FileInfo> {
-    const folder = fileName.split('/').slice(0, -1).join('/');
-    const fileNameOnly = fileName.split('/').pop() || fileName;
+    const folder = fileName.split("/").slice(0, -1).join("/");
+    const fileNameOnly = fileName.split("/").pop() || fileName;
 
     const { data, error } = await supabase.storage.from(bucketName).list(folder, {
       search: fileNameOnly,

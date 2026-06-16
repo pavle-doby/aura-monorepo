@@ -1,13 +1,13 @@
-import { storageService } from './storageService';
+import { storageService } from "./storageService";
 import {
   fileUploadsRepository,
   CreateFileUploadData,
   UpdateFileUploadData,
   FileUploadFilters,
   GetAllFileUploadsResult,
-} from '../repositories/fileUploadsRepository';
-import { PaginationReqExtended } from '../middleware/pagination';
-import { NotFoundError } from '@repo/contract';
+} from "../repositories/fileUploadsRepository";
+import { PaginationReqExtended } from "../middleware/pagination";
+import { NotFoundError } from "@repo/contract";
 
 export interface UploadFileReq {
   userId: string;
@@ -64,7 +64,7 @@ export const fileService = {
       fileName,
       contentType,
       isPublic = false,
-      folder = '',
+      folder = "",
     } = request;
 
     // Create the full file path with folder if provided
@@ -180,7 +180,7 @@ export const fileService = {
 
     if (!fileUpload) {
       throw new NotFoundError({
-        error: new Error('File not found in database'),
+        error: new Error("File not found in database"),
       });
     }
 
@@ -210,7 +210,7 @@ export const fileService = {
     const exists = await fileUploadsRepository.exists(id);
     if (!exists) {
       throw new NotFoundError({
-        error: new Error('File not found'),
+        error: new Error("File not found"),
       });
     }
 
@@ -227,7 +227,7 @@ export const fileService = {
 
     if (!updatedFile) {
       throw new NotFoundError({
-        error: new Error('File not found after update'),
+        error: new Error("File not found after update"),
       });
     }
 
@@ -255,7 +255,7 @@ export const fileService = {
 
     if (!fileUpload) {
       throw new NotFoundError({
-        error: new Error('File not found'),
+        error: new Error("File not found"),
       });
     }
 
@@ -300,7 +300,7 @@ export const fileService = {
 
     if (!fileUpload) {
       throw new NotFoundError({
-        error: new Error('File not found'),
+        error: new Error("File not found"),
       });
     }
 

@@ -28,17 +28,17 @@ src/
 ## Component pattern — cva + Radix Slot
 
 ```tsx
-import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { Slot } from 'radix-ui';
-import { cn } from '@repo/ui-web/lib/utils';
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { Slot } from "radix-ui";
+import { cn } from "@repo/ui-web/lib/utils";
 
-const myVariants = cva('base-classes', {
+const myVariants = cva("base-classes", {
   variants: {
-    variant: { default: '...', outline: '...' },
-    size: { default: '...', sm: '...', lg: '...' },
+    variant: { default: "...", outline: "..." },
+    size: { default: "...", sm: "...", lg: "..." },
   },
-  defaultVariants: { variant: 'default', size: 'default' },
+  defaultVariants: { variant: "default", size: "default" },
 });
 
 function MyComponent({
@@ -47,8 +47,8 @@ function MyComponent({
   size,
   asChild = false,
   ...props
-}: React.ComponentProps<'div'> & VariantProps<typeof myVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : 'div';
+}: React.ComponentProps<"div"> & VariantProps<typeof myVariants> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : "div";
   return <Comp className={cn(myVariants({ variant, size }), className)} {...props} />;
 }
 
@@ -72,8 +72,8 @@ Design tokens come from `@repo/ui-theme/web` (imported in `globals.css`). Use CS
 Use `lucide-react`. Size classes via Tailwind (`size-4`, `size-5`). The default `[&_svg:not([class*='size-'])]:size-4` base class in button handles unsized SVGs automatically.
 
 ```tsx
-import { ChevronDown } from 'lucide-react';
-<ChevronDown className="size-4" />
+import { ChevronDown } from "lucide-react";
+<ChevronDown className="size-4" />;
 ```
 
 ## Dark mode
@@ -95,8 +95,8 @@ Installed components land in `src/components/` automatically. Review them before
 Consumers import components by path alias:
 
 ```ts
-import { Button } from '@repo/ui-web/components/button';
-import { cn } from '@repo/ui-web/lib/utils';
+import { Button } from "@repo/ui-web/components/button";
+import { cn } from "@repo/ui-web/lib/utils";
 ```
 
 The `exports` field in `package.json` uses wildcard entries; no manual registration is needed for new files. Verify `packages/ui-web/package.json` exports cover the new path.

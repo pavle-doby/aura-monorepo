@@ -1,4 +1,4 @@
-import type { NextConfig } from "next"
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   transpilePackages: [
@@ -9,6 +9,6 @@ const nextConfig: NextConfig = {
     "@repo/ui",
     "@repo/ui-web",
   ],
-}
+};
 
-export default nextConfig
+export default nextConfig;

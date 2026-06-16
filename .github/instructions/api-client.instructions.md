@@ -28,7 +28,7 @@ pnpm api-client:generate   # runs generate:openapi then orval
 All generated hooks call `customInstance` (the Orval mutator), which delegates to `apiClient` from `src/lib/apiClient.ts`. Never create a second Axios instance — always use `apiClient` from this file.
 
 ```ts
-import { apiClient } from '@repo/api-client';
+import { apiClient } from "@repo/api-client";
 ```
 
 ## Token flow — web vs native
@@ -38,10 +38,10 @@ Web uses HTTP-only cookies (`withCredentials: true`). No token management needed
 Native must call `configureTokenProviders` at app startup **before** any API request is made:
 
 ```ts
-import { configureTokenProviders } from '@repo/api-client';
+import { configureTokenProviders } from "@repo/api-client";
 
 configureTokenProviders({
-  getToken: async () => await SecureStore.getItemAsync('accessToken'),
+  getToken: async () => await SecureStore.getItemAsync("accessToken"),
   onRefresh: async () => {
     // call your refresh logic, return { accessToken, refreshToken } or null
   },
@@ -55,7 +55,7 @@ The `request` interceptor attaches `Authorization: Bearer <token>` only when a t
 When Orval generates a new tag module, re-export it from `src/index.ts`:
 
 ```ts
-export * from './generated/<tag>/<tag>';
+export * from "./generated/<tag>/<tag>";
 ```
 
 Never re-export anything from `src/generated/` directly in consuming apps — always go through `@repo/api-client`.
@@ -69,7 +69,7 @@ Never re-export anything from `src/generated/` directly in consuming apps — al
 Wrap the app root with `ApiClientProvider` (already a `QueryClientProvider`). Do not create additional `QueryClient` instances in apps.
 
 ```tsx
-import { ApiClientProvider } from '@repo/api-client';
+import { ApiClientProvider } from "@repo/api-client";
 
 export default function RootLayout({ children }) {
   return <ApiClientProvider>{children}</ApiClientProvider>;

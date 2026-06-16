@@ -1,26 +1,22 @@
-import { notFound } from "next/navigation"
+import { notFound } from "next/navigation";
 
-import { LoginForm } from "./components/login-form"
-import { SignupForm } from "./components/signup-form"
-import { ForgotForm } from "./components/forgot-form"
+import { LoginForm } from "./components/login-form";
+import { SignupForm } from "./components/signup-form";
+import { ForgotForm } from "./components/forgot-form";
 
-const MODES = ["login", "signup", "forgot"] as const
+const MODES = ["login", "signup", "forgot"] as const;
 
-type Mode = (typeof MODES)[number]
+type Mode = (typeof MODES)[number];
 
 export function generateStaticParams() {
-  return MODES.map((mode) => ({ mode }))
+  return MODES.map((mode) => ({ mode }));
 }
 
-export default async function AuthPage({
-  params,
-}: {
-  params: Promise<{ mode: string }>
-}) {
-  const { mode } = await params
+export default async function AuthPage({ params }: { params: Promise<{ mode: string }> }) {
+  const { mode } = await params;
 
   if (!MODES.includes(mode as Mode)) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -31,5 +27,5 @@ export default async function AuthPage({
         {mode === "forgot" && <ForgotForm />}
       </div>
     </div>
-  )
+  );
 }

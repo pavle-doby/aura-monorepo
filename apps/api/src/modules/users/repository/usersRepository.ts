@@ -1,7 +1,7 @@
-import { CreateUserReq, UpdateUserReq, Search, FilterUser, GetAllUsersRes } from '@repo/contract';
-import { db, schema } from '@repo/db';
-import { PaginationReqExtended } from 'api/middleware/pagination';
-import { eq, desc, ilike, or, and, count } from 'drizzle-orm';
+import { CreateUserReq, UpdateUserReq, Search, FilterUser, GetAllUsersRes } from "@repo/contract";
+import { db, schema } from "@repo/db";
+import { PaginationReqExtended } from "api/middleware/pagination";
+import { eq, desc, ilike, or, and, count } from "drizzle-orm";
 
 export const usersRepository = {
   getUserByEmail: async (email: string) => {

@@ -22,30 +22,34 @@ src/
 Use `cva` for variants. Web-only CSS behaviours (hover, focus-visible, outline, whitespace, transitions) must be wrapped in `Platform.select({ web: '...' })` so they are never applied on iOS/Android.
 
 ```tsx
-import { cn } from '../lib/utils';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { Platform, Pressable } from 'react-native';
+import { cn } from "../lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
+import { Platform, Pressable } from "react-native";
 
 const myVariants = cva(
   cn(
-    'base-native-classes',
-    Platform.select({ web: 'hover:bg-muted focus-visible:ring-2 outline-none' })
+    "base-native-classes",
+    Platform.select({ web: "outline-none hover:bg-muted focus-visible:ring-2" })
   ),
   {
     variants: {
       variant: {
-        default: cn('bg-primary active:bg-primary/90', Platform.select({ web: 'hover:bg-primary/90' })),
+        default: cn(
+          "bg-primary active:bg-primary/90",
+          Platform.select({ web: "hover:bg-primary/90" })
+        ),
       },
       size: {
-        default: 'h-10 px-4',
+        default: "h-10 px-4",
       },
     },
-    defaultVariants: { variant: 'default', size: 'default' },
+    defaultVariants: { variant: "default", size: "default" },
   }
 );
 ```
 
 Key differences from `@repo/ui-web` (web):
+
 - Use `Pressable` / `Text` / `View` from `react-native`, not HTML elements.
 - `active:` pseudo-class = native press feedback. `hover:` only applies on web.
 - No `asChild` / Radix Slot — use `@rn-primitives/slot` (`Slot` from `'@rn-primitives/slot'`).
@@ -54,10 +58,10 @@ Key differences from `@repo/ui-web` (web):
 
 ```tsx
 // ✅ correct
-import { Slot } from '@rn-primitives/slot';
+import { Slot } from "@rn-primitives/slot";
 
 // ❌ wrong — radix-ui Slot is web-only
-import { Slot } from 'radix-ui';
+import { Slot } from "radix-ui";
 ```
 
 ## TextClassContext — propagate text colour to icons and nested text
@@ -65,11 +69,11 @@ import { Slot } from 'radix-ui';
 `TextClassContext` is a React context that carries the current text Tailwind class down the tree. Consume it in components that need to inherit text color (e.g. icons inside buttons):
 
 ```tsx
-import { TextClassContext } from './text';
+import { TextClassContext } from "./text";
 
 function Icon({ className, ...props }) {
   const textClass = React.useContext(TextClassContext);
-  return <IconImpl className={cn('text-foreground', textClass, className)} {...props} />;
+  return <IconImpl className={cn("text-foreground", textClass, className)} {...props} />;
 }
 ```
 
@@ -80,13 +84,13 @@ Provide it in container components (e.g. Button) to control icon colour for a sp
 Use `lucide-react-native` (not `lucide-react`). Icons need `cssInterop` so NativeWind can drive `size` via `height`/`width` style props:
 
 ```tsx
-import type { LucideIcon, LucideProps } from 'lucide-react-native';
-import { cssInterop } from 'nativewind';
+import type { LucideIcon, LucideProps } from "lucide-react-native";
+import { cssInterop } from "nativewind";
 
 cssInterop(IconImpl, {
   className: {
-    target: 'style',
-    nativeStyleToProp: { height: 'size', width: 'size' },
+    target: "style",
+    nativeStyleToProp: { height: "size", width: "size" },
   },
 });
 ```
@@ -102,10 +106,10 @@ NativeWind resolves Tailwind utility classes to React Native styles using the th
 Components, hooks, and lib utilities are exported via path aliases:
 
 ```ts
-import { Button } from '@repo/ui-native/components/button';
-import { Text } from '@repo/ui-native/components/text';
-import { Icon } from '@repo/ui-native/components/icon';
-import { cn } from '@repo/ui-native/lib/utils';
+import { Button } from "@repo/ui-native/components/button";
+import { Text } from "@repo/ui-native/components/text";
+import { Icon } from "@repo/ui-native/components/icon";
+import { cn } from "@repo/ui-native/lib/utils";
 ```
 
 The `exports` field in `package.json` uses wildcard patterns (`"./components/*"`, `"./hooks/*"`, `"./lib/*"`). New files in those folders are automatically available without editing `package.json`.

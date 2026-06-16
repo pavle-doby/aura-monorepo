@@ -1,6 +1,11 @@
-import type { Request, Response } from 'express';
-import { authService } from '../services/authService';
-import { AuthLogInUserReq, AuthNativeRefreshTokenReq, AuthSignUpUserReq, User } from '@repo/contract';
+import type { Request, Response } from "express";
+import { authService } from "../services/authService";
+import {
+  AuthLogInUserReq,
+  AuthNativeRefreshTokenReq,
+  AuthSignUpUserReq,
+  User,
+} from "@repo/contract";
 
 export const authController = {
   signUp: async (_req: Request, res: Response) => {

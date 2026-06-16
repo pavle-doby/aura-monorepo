@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { ErrorCode } from './ErrorCode';
+import { z } from "zod";
+import { ErrorCode } from "./ErrorCode";
 
 export const ApiErrorSchema = z.object({
   status: z.number().int(),

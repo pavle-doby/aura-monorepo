@@ -47,4 +47,4 @@ export const auth = {
     emailPlaceholder: "vas@imejl.com",
     submit: "Pošaljite link za resetovanje",
   },
-}
+};

@@ -1,11 +1,11 @@
-import z from 'zod';
-import { registry } from './registry';
-import { PaginationSchema, UserSchema as UserSchemaBase } from '@repo/contract';
+import z from "zod";
+import { registry } from "./registry";
+import { PaginationSchema, UserSchema as UserSchemaBase } from "@repo/contract";
 
-export const UserSchema = registry.register('User', UserSchemaBase);
+export const UserSchema = registry.register("User", UserSchemaBase);
 
 export const NativeAuthWithTokensSchema = registry.register(
-  'NativeAuthWithTokens',
+  "NativeAuthWithTokens",
   z.object({
     user: UserSchemaBase,
     accessToken: z.string(),
@@ -14,7 +14,7 @@ export const NativeAuthWithTokensSchema = registry.register(
 );
 
 export const NativeAuthTokensSchema = registry.register(
-  'NativeAuthTokens',
+  "NativeAuthTokens",
   z.object({
     accessToken: z.string(),
     refreshToken: z.string(),
@@ -22,7 +22,7 @@ export const NativeAuthTokensSchema = registry.register(
 );
 
 export const PaginatedUsersSchema = registry.register(
-  'Users',
+  "Users",
   z.object({
     data: z.array(UserSchema),
     pagination: PaginationSchema,

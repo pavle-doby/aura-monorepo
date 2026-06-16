@@ -1,8 +1,8 @@
-import 'i18next';
-import en from './locales/en';
-import { LOCALES, DEFAULT_NS } from './constants';
+import "i18next";
+import en from "./locales/en";
+import { LOCALES, DEFAULT_NS } from "./constants";
 
-declare module 'i18next' {
+declare module "i18next" {
   interface CustomTypeOptions {
     defaultNS: typeof DEFAULT_NS;
     resources: { [K in typeof DEFAULT_NS]: typeof en };

@@ -1,7 +1,7 @@
-import { ErrorCode, PaginationReq } from '@repo/contract';
-import { BadRequestError } from '@repo/contract';
-import type { Request, Response, NextFunction } from 'express';
-import { z } from 'zod';
+import { ErrorCode, PaginationReq } from "@repo/contract";
+import { BadRequestError } from "@repo/contract";
+import type { Request, Response, NextFunction } from "express";
+import { z } from "zod";
 
 const BASE = 0; // 0-based indexing
 const LIMIT_MIN = 1;

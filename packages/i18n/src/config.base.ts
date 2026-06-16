@@ -1,6 +1,6 @@
-import en from './locales/en';
-import sr from './locales/sr';
-import { DEFAULT_NS } from './constants';
+import en from "./locales/en";
+import sr from "./locales/sr";
+import { DEFAULT_NS } from "./constants";
 
 export const resources = {
   en: { common: en },

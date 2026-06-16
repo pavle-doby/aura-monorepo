@@ -1,6 +1,6 @@
-import { db, schema } from '@repo/db';
-import type { CreateUser } from './types';
-import { eq } from 'drizzle-orm';
+import { db, schema } from "@repo/db";
+import type { CreateUser } from "./types";
+import { eq } from "drizzle-orm";
 
 export const authRepository = {
   getUserByEmail: async (email: string) => {

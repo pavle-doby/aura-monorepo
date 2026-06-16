@@ -81,13 +81,13 @@ aura-monorepo/                    # pnpm + Turborepo monorepo
 
 ## Key Decisions
 
-| Decision | Choice | Why |
-|----------|--------|-----|
-| API style | REST + OpenAPI | Enables Orval code-gen; type-safe across all clients |
-| Auth | Supabase Auth (JWT) | Web: HTTP-only cookie; Native: Bearer header |
-| DB | Drizzle ORM + PostgreSQL via Supabase | Type-safe SQL-first; schema-to-Zod via drizzle-zod |
-| Schema ownership | `db-schema` → `contract` | Single source of truth; prevents drift between DB and validation |
-| API client | Orval (code-gen) | `src/generated/` is always in sync with `openapi.json` |
-| Styling | Tailwind 4 + NativeWind | One token system (`ui-theme`) shared by web and mobile |
-| i18n | i18next | Serbian default, English secondary; platform-specific configs |
-| Build | Turborepo | Remote caching, task graph, watch mode across all packages |
+| Decision         | Choice                                | Why                                                              |
+| ---------------- | ------------------------------------- | ---------------------------------------------------------------- |
+| API style        | REST + OpenAPI                        | Enables Orval code-gen; type-safe across all clients             |
+| Auth             | Supabase Auth (JWT)                   | Web: HTTP-only cookie; Native: Bearer header                     |
+| DB               | Drizzle ORM + PostgreSQL via Supabase | Type-safe SQL-first; schema-to-Zod via drizzle-zod               |
+| Schema ownership | `db-schema` → `contract`              | Single source of truth; prevents drift between DB and validation |
+| API client       | Orval (code-gen)                      | `src/generated/` is always in sync with `openapi.json`           |
+| Styling          | Tailwind 4 + NativeWind               | One token system (`ui-theme`) shared by web and mobile           |
+| i18n             | i18next                               | Serbian default, English secondary; platform-specific configs    |
+| Build            | Turborepo                             | Remote caching, task graph, watch mode across all packages       |

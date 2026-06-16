@@ -1,19 +1,19 @@
-import { z } from 'zod';
-import { UserEntity } from '@repo/db-schema';
-import { PaginationReq, PaginationRes, Search } from '../shared';
+import { z } from "zod";
+import { UserEntity } from "@repo/db-schema";
+import { PaginationReq, PaginationRes, Search } from "../shared";
 import {
   UserGetAllQuerySchema,
   UserPostQuerySchema,
   UserPutQuerySchema,
   UserSchema,
-} from './schemas';
+} from "./schemas";
 
 export type User = z.infer<typeof UserSchema>;
 
 export type UserExtended = User & {};
 
-export type UserStatus = UserEntity['status'];
-export type UserRole = UserEntity['role'];
+export type UserStatus = UserEntity["status"];
+export type UserRole = UserEntity["role"];
 
 export type FilterUser = {
   status?: UserStatus;
@@ -28,7 +28,7 @@ export type GetAllUsersReq<Pagination = PaginationReq> = Pagination &
 export type GetAllUsersRes = PaginationRes<UserExtended>;
 
 // GET /users/:id → get user by id
-export type GetUserReq = Pick<User, 'id'>;
+export type GetUserReq = Pick<User, "id">;
 export type GetUserRes = UserExtended | undefined;
 
 // POST /users → create new user

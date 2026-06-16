@@ -18,7 +18,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
     exposedHeaders: ["Set-Cookie"],
-  }),
+  })
 );
 
 app.use(express.json());
@@ -33,9 +33,7 @@ app.use(handleError);
 
 const PORT = Number(env.SERVER_PORT);
 
-app.listen(PORT, () =>
-  console.log(`[${green("Server")}] Running on: http://localhost:${PORT}`),
-);
+app.listen(PORT, () => console.log(`[${green("Server")}] Running on: http://localhost:${PORT}`));
 
 process.on("uncaughtException", (error) => {
   logger.fatal(error, "uncaught exception detected");

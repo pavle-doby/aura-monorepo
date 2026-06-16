@@ -10,22 +10,14 @@ import { useAuthLogin } from "@repo/api-client";
 import { AuthLoginQuerySchema, type AuthLogInUserReq } from "@repo/contract";
 import { useT } from "@repo/i18n/client";
 import { Card, CardContent } from "@repo/ui-web/components/card";
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "@repo/ui-web/components/field";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@repo/ui-web/components/field";
 import { Input } from "@repo/ui-web/components/input";
 import { Alert, AlertTitle } from "@repo/ui-web/components/alert";
 import { Button } from "@repo/ui-web/components/button";
 import { Separator } from "@repo/ui-web/components/separator";
 import { cn } from "@repo/ui-web/lib/utils";
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const id = useId();
   const router = useRouter();
   const { t } = useT();
@@ -54,9 +46,7 @@ export function LoginForm({
             response?: { data?: { code?: string; message?: string } };
           };
           const code = axiosError?.response?.data?.code;
-          const message =
-            axiosError?.response?.data?.message ??
-            "Login failed. Please try again.";
+          const message = axiosError?.response?.data?.message ?? "Login failed. Please try again.";
 
           if (code === "unauthorized" || code === "not_found") {
             setError("email", { message });
@@ -77,9 +67,7 @@ export function LoginForm({
           <form onSubmit={handleSubmit(onSubmit)}>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor={`${id}-email`}>
-                  {t("auth.login.emailLabel")}
-                </FieldLabel>
+                <FieldLabel htmlFor={`${id}-email`}>{t("auth.login.emailLabel")}</FieldLabel>
                 <Input
                   id={`${id}-email`}
                   type="email"
@@ -90,9 +78,7 @@ export function LoginForm({
                 <FieldError errors={[errors.email]} />
               </Field>
               <Field>
-                <FieldLabel htmlFor={`${id}-password`}>
-                  {t("auth.login.passwordLabel")}
-                </FieldLabel>
+                <FieldLabel htmlFor={`${id}-password`}>{t("auth.login.passwordLabel")}</FieldLabel>
                 <div className="relative">
                   <Input
                     className="pr-10"
@@ -107,22 +93,15 @@ export function LoginForm({
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
                     aria-label={
-                      showPassword
-                        ? t("auth.login.hidePassword")
-                        : t("auth.login.showPassword")
+                      showPassword ? t("auth.login.hidePassword") : t("auth.login.showPassword")
                     }
                   >
-                    {showPassword ? (
-                      <EyeOff className="size-4" />
-                    ) : (
-                      <Eye className="size-4" />
-                    )}
+                    {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
                 </div>
                 <FieldError errors={[errors.password]} />
                 <Link href="/auth/forgot" className="text-sm">
-                  {t("auth.login.forgotPassword")}{" "}
-                  <strong>{t("auth.login.resetPassword")}</strong>
+                  {t("auth.login.forgotPassword")} <strong>{t("auth.login.resetPassword")}</strong>
                 </Link>
               </Field>
               {errors.root && (
@@ -148,13 +127,8 @@ export function LoginForm({
         </CardContent>
       </Card>
       <div className="flex items-center gap-2">
-        <p className="text-sm text-muted-foreground">
-          {t("auth.login.noAccount")}
-        </p>
-        <Link
-          href="/auth/signup"
-          className="rounded-md border px-4 py-2 text-sm font-semibold"
-        >
+        <p className="text-sm text-muted-foreground">{t("auth.login.noAccount")}</p>
+        <Link href="/auth/signup" className="rounded-md border px-4 py-2 text-sm font-semibold">
           {t("auth.login.signUp")}
         </Link>
       </div>

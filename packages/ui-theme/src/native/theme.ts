@@ -1,4 +1,4 @@
-import { DarkTheme, DefaultTheme, type Theme } from "@react-navigation/native"
+import { DarkTheme, DefaultTheme, type Theme } from "@react-navigation/native";
 
 export const THEME = {
   light: {
@@ -53,10 +53,10 @@ export const THEME = {
     chart4: "hsl(280 65% 60%)",
     chart5: "hsl(340 75% 55%)",
   },
-} as const
+} as const;
 
-export type ThemeColors = (typeof THEME)["light"] & (typeof THEME)["dark"]
-export type ColorScheme = keyof typeof THEME
+export type ThemeColors = (typeof THEME)["light"] & (typeof THEME)["dark"];
+export type ColorScheme = keyof typeof THEME;
 
 export const NAV_THEME: Record<ColorScheme, Theme> = {
   light: {
@@ -81,4 +81,4 @@ export const NAV_THEME: Record<ColorScheme, Theme> = {
       text: THEME.dark.foreground,
     },
   },
-}
+};

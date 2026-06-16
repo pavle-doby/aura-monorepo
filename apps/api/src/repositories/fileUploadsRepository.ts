@@ -1,8 +1,8 @@
-import { db, schema } from '@repo/db';
-import { eq, desc, and, count, ilike } from 'drizzle-orm';
-import { PaginationReqExtended } from '../middleware/pagination';
-import { FileUploadEntity } from '@repo/db-schema';
-import { PaginationRes } from '@repo/contract';
+import { db, schema } from "@repo/db";
+import { eq, desc, and, count, ilike } from "drizzle-orm";
+import { PaginationReqExtended } from "../middleware/pagination";
+import { FileUploadEntity } from "@repo/db-schema";
+import { PaginationRes } from "@repo/contract";
 
 export interface FileUploadFilters {
   userId?: string;
@@ -12,9 +12,9 @@ export interface FileUploadFilters {
 }
 export type GetAllFileUploadsResult = PaginationRes<FileUploadEntity>;
 
-export type CreateFileUploadData = Omit<FileUploadEntity, 'id' | 'uploadedAt'>;
+export type CreateFileUploadData = Omit<FileUploadEntity, "id" | "uploadedAt">;
 
-export type UpdateFileUploadData = Partial<Omit<FileUploadEntity, 'id' | 'userId' | 'uploadedAt'>>;
+export type UpdateFileUploadData = Partial<Omit<FileUploadEntity, "id" | "userId" | "uploadedAt">>;
 
 export const fileUploadsRepository = {
   /**

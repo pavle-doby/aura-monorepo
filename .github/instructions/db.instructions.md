@@ -23,8 +23,8 @@ drizzle.config.ts # drizzle-kit config — points schema at src/schema.ts
 ## Public Exports (`src/index.ts`)
 
 ```ts
-export * from './client';       // db, client
-export * as schema from '@repo/db-schema'; // all tables/enums
+export * from "./client"; // db, client
+export * as schema from "@repo/db-schema"; // all tables/enums
 ```
 
 - `db` — the Drizzle query client; the only object repositories should use for queries.
@@ -34,10 +34,10 @@ export * as schema from '@repo/db-schema'; // all tables/enums
 ## Client Setup (`src/client.ts`)
 
 ```ts
-import * as schema from '@repo/db-schema';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
-import { env } from './env';
+import * as schema from "@repo/db-schema";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
+import { env } from "./env";
 
 export const client = postgres(env.DATABASE_URL, { prepare: false });
 export const db = drizzle(client, { schema });
@@ -49,9 +49,9 @@ export const db = drizzle(client, { schema });
 ## Env Config (`src/env.ts`)
 
 ```ts
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
-dotenv.config({ path: ['.env', '.env.local'] });
+dotenv.config({ path: [".env", ".env.local"] });
 
 export const env = process.env as {
   DATABASE_URL: string;
@@ -65,7 +65,7 @@ export const env = process.env as {
 ## Schema Re-export (`src/schema.ts`)
 
 ```ts
-export * from '@repo/db-schema';
+export * from "@repo/db-schema";
 ```
 
 This is the single entry-point `drizzle.config.ts` uses. Do not add anything else here.
@@ -74,9 +74,9 @@ This is the single entry-point `drizzle.config.ts` uses. Do not add anything els
 
 ```ts
 export default {
-  schema: './src/schema.ts',
-  out: './drizzle',
-  dialect: 'postgresql',
+  schema: "./src/schema.ts",
+  out: "./drizzle",
+  dialect: "postgresql",
   dbCredentials: { url: env.DATABASE_URL! },
   verbose: true,
   strict: true,
@@ -104,14 +104,10 @@ pnpm db:migrate    # runs pending migration files (CI / production)
 Always import `db` and `schema` together from `@repo/db`:
 
 ```ts
-import { db, schema } from '@repo/db';
-import { eq } from 'drizzle-orm';
+import { db, schema } from "@repo/db";
+import { eq } from "drizzle-orm";
 
-const [user] = await db
-  .select()
-  .from(schema.users)
-  .where(eq(schema.users.email, email))
-  .limit(1);
+const [user] = await db.select().from(schema.users).where(eq(schema.users.email, email)).limit(1);
 ```
 
 - Access columns via `schema.<table>.<column>` — this keeps queries type-safe against the live schema.

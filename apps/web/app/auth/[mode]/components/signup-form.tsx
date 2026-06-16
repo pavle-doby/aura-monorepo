@@ -1,47 +1,39 @@
-"use client"
+"use client";
 
-import { useId, useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import { AlertCircleIcon, Eye, EyeOff } from "lucide-react"
-import { useAuthSignUp } from "@repo/api-client"
-import { AuthSignUpQuerySchema } from "@repo/contract"
-import { useT } from "@repo/i18n/client"
-import { Card, CardContent } from "@repo/ui-web/components/card"
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "@repo/ui-web/components/field"
-import { Input } from "@repo/ui-web/components/input"
-import { Alert, AlertTitle } from "@repo/ui-web/components/alert"
-import { Button } from "@repo/ui-web/components/button"
-import { cn } from "@repo/ui-web/lib/utils"
+import { useId, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { AlertCircleIcon, Eye, EyeOff } from "lucide-react";
+import { useAuthSignUp } from "@repo/api-client";
+import { AuthSignUpQuerySchema } from "@repo/contract";
+import { useT } from "@repo/i18n/client";
+import { Card, CardContent } from "@repo/ui-web/components/card";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@repo/ui-web/components/field";
+import { Input } from "@repo/ui-web/components/input";
+import { Alert, AlertTitle } from "@repo/ui-web/components/alert";
+import { Button } from "@repo/ui-web/components/button";
+import { cn } from "@repo/ui-web/lib/utils";
 
 const SignupFormSchema = AuthSignUpQuerySchema.extend({
   confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords do not match",
   path: ["confirmPassword"],
-})
+});
 
-type SignupFormData = z.infer<typeof SignupFormSchema>
+type SignupFormData = z.infer<typeof SignupFormSchema>;
 
-export function SignupForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  const id = useId()
-  const router = useRouter()
-  const { t } = useT()
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+export function SignupForm({ className, ...props }: React.ComponentProps<"div">) {
+  const id = useId();
+  const router = useRouter();
+  const { t } = useT();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const { mutate: signupMutate, isPending } = useAuthSignUp()
+  const { mutate: signupMutate, isPending } = useAuthSignUp();
 
   const {
     register,
@@ -50,34 +42,32 @@ export function SignupForm({
     formState: { errors },
   } = useForm<SignupFormData>({
     resolver: zodResolver(SignupFormSchema),
-  })
+  });
 
   function onSubmit(formData: SignupFormData) {
-    const { firstName, lastName, email, password } = formData
+    const { firstName, lastName, email, password } = formData;
     signupMutate(
       { data: { firstName, lastName, email, password } },
       {
         onSuccess: () => {
-          router.replace("/")
+          router.replace("/");
         },
         // TODO@pavle: Handle errors better.
         onError: (error: unknown) => {
           const axiosError = error as {
-            response?: { data?: { code?: string; message?: string } }
-          }
-          const code = axiosError?.response?.data?.code
-          const message =
-            axiosError?.response?.data?.message ??
-            "Signup failed. Please try again."
+            response?: { data?: { code?: string; message?: string } };
+          };
+          const code = axiosError?.response?.data?.code;
+          const message = axiosError?.response?.data?.message ?? "Signup failed. Please try again.";
 
           if (code === "auth_user_exists") {
-            setError("email", { message })
+            setError("email", { message });
           } else {
-            setError("root", { message })
+            setError("root", { message });
           }
         },
       }
-    )
+    );
   }
 
   return (
@@ -116,9 +106,7 @@ export function SignupForm({
                 </Field>
               </div>
               <Field>
-                <FieldLabel htmlFor={`${id}-email`}>
-                  {t("auth.signup.emailLabel")}
-                </FieldLabel>
+                <FieldLabel htmlFor={`${id}-email`}>{t("auth.signup.emailLabel")}</FieldLabel>
                 <Input
                   id={`${id}-email`}
                   type="email"
@@ -129,9 +117,7 @@ export function SignupForm({
                 <FieldError errors={[errors.email]} />
               </Field>
               <Field>
-                <FieldLabel htmlFor={`${id}-password`}>
-                  {t("auth.signup.passwordLabel")}
-                </FieldLabel>
+                <FieldLabel htmlFor={`${id}-password`}>{t("auth.signup.passwordLabel")}</FieldLabel>
                 <div className="relative">
                   <Input
                     className="pr-10"
@@ -146,16 +132,10 @@ export function SignupForm({
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
                     aria-label={
-                      showPassword
-                        ? t("auth.signup.hidePassword")
-                        : t("auth.signup.showPassword")
+                      showPassword ? t("auth.signup.hidePassword") : t("auth.signup.showPassword")
                     }
                   >
-                    {showPassword ? (
-                      <EyeOff className="size-4" />
-                    ) : (
-                      <Eye className="size-4" />
-                    )}
+                    {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
                 </div>
                 <FieldError errors={[errors.password]} />
@@ -206,16 +186,11 @@ export function SignupForm({
         </CardContent>
       </Card>
       <div className="flex items-center gap-2">
-        <p className="text-sm text-muted-foreground">
-          {t("auth.signup.hasAccount")}
-        </p>
-        <Link
-          href="/auth/login"
-          className="rounded-md border px-4 py-2 text-sm font-semibold"
-        >
+        <p className="text-sm text-muted-foreground">{t("auth.signup.hasAccount")}</p>
+        <Link href="/auth/login" className="rounded-md border px-4 py-2 text-sm font-semibold">
           {t("auth.signup.logIn")}
         </Link>
       </div>
     </div>
-  )
+  );
 }

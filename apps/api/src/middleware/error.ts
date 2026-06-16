@@ -1,13 +1,13 @@
-import type { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from "express";
 import {
   ErrorCode,
   NotFoundError,
   InternalServerError,
   UnprocessableEntityError,
   ApiError,
-} from '@repo/contract';
-import { logger } from 'api/logger';
-import postgres from 'postgres';
+} from "@repo/contract";
+import { logger } from "api/logger";
+import postgres from "postgres";
 
 /**
  * Middleware to handle not found endpoints
@@ -17,7 +17,7 @@ export const handleErrorNotFound = (_req: Request, res: Response, _next: NextFun
     code: ErrorCode.NOT_FOUND_ENDPOINT,
   });
 
-  logger.warn({ error }, 'Endpoint not found');
+  logger.warn({ error }, "Endpoint not found");
 
   res.status(error.status).json(error);
 };
@@ -31,14 +31,14 @@ export function handleError(err: unknown, _req: Request, res: Response, _next: N
   const error = err as ApiError | Error;
 
   if (error instanceof ApiError) {
-    logger.warn({ error }, 'Handled error');
+    logger.warn({ error }, "Handled error");
     res.status(error.status).json(error);
     return;
   }
 
   if (error.cause instanceof postgres.PostgresError) {
     const dbError = new UnprocessableEntityError({ error });
-    logger.error({ dbError }, 'Unhandled database error');
+    logger.error({ dbError }, "Unhandled database error");
     res.status(dbError.status).json(dbError);
 
     return;
@@ -49,7 +49,7 @@ export function handleError(err: unknown, _req: Request, res: Response, _next: N
     error: error,
   });
 
-  logger.error({ error, serverError }, 'Unhandled server error');
+  logger.error({ error, serverError }, "Unhandled server error");
 
   res.status(serverError.status).json(serverError);
 }
