@@ -1,4 +1,4 @@
-import type { ZodType } from "zod";
+import { ZodType } from "zod";
 import type { Request, Response, NextFunction } from "express";
 import { ErrorCode } from "@repo/contract";
 import { BadRequestError } from "@repo/contract";
@@ -22,8 +22,12 @@ export function validate(schema: ZodType, source: SourceType = "body") {
     if (!result.success) {
       const error = new BadRequestError({
         code: ErrorCode.VALIDATION_ERROR,
-        error: result.error,
+        error: {
+          name: result.error.name,
+          issues: result.error.issues,
+        },
       });
+
       res.status(error.status).json(error);
       return;
     }

@@ -14,17 +14,24 @@
     "check-types": "tsc --noEmit",
     "lint-staged": "lint-staged"
   },
+  "dependencies": {
+    "@repo/contract": "workspace:*",
+    "axios": "^1.16.1",
+    "react-hook-form": "^7.77.0",
+    "zod": "^4.4.3"
+  },
   "peerDependencies": {
     "react": ">=18.0.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "i18next": "^26.2.0",
     "@types/react": "^19",
     "eslint": "^9",
+    "lint-staged": "^17.0.7",
     "react": "19.2.0",
-    "typescript": "^5",
-    "lint-staged": "^17.0.7"
+    "typescript": "^5"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [

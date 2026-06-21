@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { ApiClientProvider } from "@repo/api-client";
 import { I18nProvider } from "@repo/i18n/client";
 import i18nConfig, { getT, getResources, initServerI18next } from "@repo/i18n/server";
+import { Toaster } from "@repo/ui-web/components/sonner";
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -38,7 +39,10 @@ export default async function RootLayout({
       >
         <body>
           <ApiClientProvider>
-            <ThemeProvider>{children}</ThemeProvider>
+            <ThemeProvider>
+              {children}
+              <Toaster />
+            </ThemeProvider>
           </ApiClientProvider>
         </body>
       </html>

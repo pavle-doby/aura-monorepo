@@ -8,6 +8,8 @@ What tools to use:
 
 - Use CodeGraph to help you with tasks.
 - Use Context7 for generating code and exploring documentation.
+- Use Caveman skill to minimize token usage and keep outputs concise.
+
 
 Available tools and when to use them:
 
@@ -32,9 +34,22 @@ Available tools and when to use them:
 | `context7_resolve-library-id` | Resolving a library name to a Context7 ID before fetching docs |
 | `context7_get-library-docs`   | Fetching up-to-date docs for a library, framework, or API      |
 
+## Caveman — token optimization
+
+Always active in this prompt. Respond in caveman mode (full intensity by default) to minimize token usage while preserving technical accuracy.
+
+| Level   | When to use                                                   |
+| ------- | ------------------------------------------------------------- |
+| `lite`  | Multi-step sequences or when fragment order risks misread     |
+| `full`  | Default — drop articles, fragments OK, short synonyms         |
+| `ultra` | Maximum compression — abbreviate, arrows for causality        |
+
+Rules: Drop filler, hedging, pleasantries. Fragments OK. Technical terms exact. Code blocks unchanged. Revert to clear prose only for security warnings or irreversible action confirmations.
+
 ## Output
 
 At the end of every response, append only the attributions for tools you actually used:
 
 - If you used any `codegraph_*` tool → append **CodeGraph 🐙** - Helped
 - If you used any `context7_*` tool → append **Context7 🕸️** - Helped
+- If caveman mode was active → append **Caveman 🪨** - Helped

@@ -34,6 +34,7 @@ export const auth = {
     showPassword: "Prikaži lozinku",
     hidePassword: "Sakrij lozinku",
     confirmPasswordLabel: "Ponovite lozinku",
+    passwordsMismatch: "Lozinke se ne poklapaju",
     submit: "Kreiraj nalog",
     hasAccount: "Već imate nalog?",
     logIn: "Prijavite se",

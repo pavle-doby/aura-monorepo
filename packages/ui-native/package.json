@@ -12,6 +12,7 @@
     "@repo/ui-theme": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "sonner-native": "^0.26.2",
     "tailwind-merge": "^3.6.0"
   },
   "peerDependencies": {
@@ -27,12 +28,12 @@
     "@rn-primitives/slot": "^1.4.0",
     "@types/react": "^19",
     "eslint": "^9",
+    "lint-staged": "^17.0.7",
     "lucide-react-native": "^0.545.0",
     "nativewind": "^4.2.3",
     "react": "19.2.0",
     "react-native": "0.83.6",
-    "typescript": "^5",
-    "lint-staged": "^17.0.7"
+    "typescript": "^5"
   },
   "exports": {
     "./lib/*": "./src/lib/*.ts",

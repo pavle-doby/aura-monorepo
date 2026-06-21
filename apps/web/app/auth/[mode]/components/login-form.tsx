@@ -9,6 +9,7 @@ import { AlertCircleIcon, Eye, EyeOff } from "lucide-react";
 import { useAuthLogin } from "@repo/api-client";
 import { AuthLoginQuerySchema, type AuthLogInUserReq } from "@repo/contract";
 import { useT } from "@repo/i18n/client";
+import { useErrorHandling } from "@repo/shared/hooks";
 import { Card, CardContent } from "@repo/ui-web/components/card";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@repo/ui-web/components/field";
 import { Input } from "@repo/ui-web/components/input";
@@ -20,7 +21,7 @@ import { cn } from "@repo/ui-web/lib/utils";
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const id = useId();
   const router = useRouter();
-  const { t } = useT();
+  const { t, i18n } = useT();
   const [showPassword, setShowPassword] = useState(false);
 
   const { mutate: loginMutate, isPending } = useAuthLogin();
@@ -34,6 +35,11 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
     resolver: zodResolver(AuthLoginQuerySchema),
   });
 
+  const { handleErrorForm } = useErrorHandling<AuthLogInUserReq>({
+    i18n,
+    setError,
+  });
+
   function onSubmit(data: AuthLogInUserReq) {
     loginMutate(
       { data },
@@ -42,18 +48,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
           router.replace("/");
         },
         onError: (error: unknown) => {
-          const axiosError = error as {
-            response?: { data?: { code?: string; message?: string } };
-          };
-          const code = axiosError?.response?.data?.code;
-          const message = axiosError?.response?.data?.message ?? "Login failed. Please try again.";
-
-          if (code === "unauthorized" || code === "not_found") {
-            setError("email", { message });
-            setError("password", { message });
-          } else {
-            setError("root", { message });
-          }
+          handleErrorForm(error as Error);
         },
       }
     );
@@ -136,7 +131,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
   );
 }
 
-// TODO: Move to some reusable place
+// TODO: Think of moving this to some reusable place
 function GoogleIcon() {
   return (
     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

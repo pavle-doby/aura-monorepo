@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import type { TFunction } from "@repo/i18n";
 import { AlertCircleIcon, Eye, EyeOff } from "lucide-react";
 import { useAuthSignUp } from "@repo/api-client";
 import { AuthSignUpQuerySchema } from "@repo/contract";
 import { useT } from "@repo/i18n/client";
+import { useErrorHandling, useZodLocale } from "@repo/shared/hooks";
 import { Card, CardContent } from "@repo/ui-web/components/card";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@repo/ui-web/components/field";
 import { Input } from "@repo/ui-web/components/input";
@@ -17,20 +19,26 @@ import { Alert, AlertTitle } from "@repo/ui-web/components/alert";
 import { Button } from "@repo/ui-web/components/button";
 import { cn } from "@repo/ui-web/lib/utils";
 
-const SignupFormSchema = AuthSignUpQuerySchema.extend({
-  confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-});
+const createSignupFormSchema = (t: TFunction) =>
+  AuthSignUpQuerySchema.extend({
+    confirmPassword: z.string(),
+  }).refine((data) => data.password === data.confirmPassword, {
+    message: t("auth.signup.passwordsMismatch"),
+    path: ["confirmPassword"],
+  });
 
-type SignupFormData = z.infer<typeof SignupFormSchema>;
+type SignupFormData = z.infer<ReturnType<typeof createSignupFormSchema>>;
 
 export function SignupForm({ className, ...props }: React.ComponentProps<"div">) {
   const id = useId();
   const router = useRouter();
-  const { t } = useT();
+
+  const { t, i18n } = useT();
+  useZodLocale(i18n);
+
+  const SignupFormSchema = createSignupFormSchema(t);
   const [showPassword, setShowPassword] = useState(false);
+
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { mutate: signupMutate, isPending } = useAuthSignUp();
@@ -44,6 +52,11 @@ export function SignupForm({ className, ...props }: React.ComponentProps<"div">)
     resolver: zodResolver(SignupFormSchema),
   });
 
+  const { handleErrorForm } = useErrorHandling<SignupFormData>({
+    i18n,
+    setError,
+  });
+
   function onSubmit(formData: SignupFormData) {
     const { firstName, lastName, email, password } = formData;
     signupMutate(
@@ -52,19 +65,8 @@ export function SignupForm({ className, ...props }: React.ComponentProps<"div">)
         onSuccess: () => {
           router.replace("/");
         },
-        // TODO@pavle: Handle errors better.
         onError: (error: unknown) => {
-          const axiosError = error as {
-            response?: { data?: { code?: string; message?: string } };
-          };
-          const code = axiosError?.response?.data?.code;
-          const message = axiosError?.response?.data?.message ?? "Signup failed. Please try again.";
-
-          if (code === "auth_user_exists") {
-            setError("email", { message });
-          } else {
-            setError("root", { message });
-          }
+          handleErrorForm(error as Error);
         },
       }
     );

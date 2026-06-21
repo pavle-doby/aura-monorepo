@@ -17,6 +17,7 @@
     "@repo/api-client": "workspace:*",
     "@repo/contract": "workspace:*",
     "@repo/i18n": "workspace:*",
+    "@repo/shared": "workspace:*",
     "@repo/ui-web": "workspace:*",
     "lucide-react": "^1.17.0",
     "zod": "^4.1.12",

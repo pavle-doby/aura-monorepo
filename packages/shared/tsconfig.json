@@ -1,7 +1,11 @@
 {
   "extends": "@repo/typescript-config/react-library.json",
   "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "paths": {
+      "@repo/contract": ["../contract/src/index.ts"],
+      "@repo/contract/*": ["../contract/src/*"],
       "@repo/shared/hooks": ["./src/hooks/index.ts"],
       "@repo/shared/consts": ["./src/consts/index.ts"],
       "@repo/shared/utils": ["./src/utils/index.ts"]

@@ -34,6 +34,7 @@ export const auth = {
     showPassword: "Show password",
     hidePassword: "Hide password",
     confirmPasswordLabel: "Repeat Password",
+    passwordsMismatch: "Passwords do not match",
     submit: "Create Account",
     hasAccount: "Already have an account?",
     logIn: "Log In",
