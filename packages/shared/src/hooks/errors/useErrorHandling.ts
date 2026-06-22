@@ -2,7 +2,7 @@ import axios from "axios";
 import { FieldValues, UseFormSetError } from "react-hook-form";
 import { useCallback, useEffect } from "react";
 import type { i18n } from "i18next";
-import { getZodLocale } from "../../utils";
+import { getZodLocale } from "@repo/shared/utils";
 import { authErrorMessages } from "./consts/authErrorMessages";
 import { userErrorMessages } from "./consts/userErrorMessages";
 import { sharedErrorMessages } from "./consts/sharedErrorMessages";

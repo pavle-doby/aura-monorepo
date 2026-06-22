@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import type { i18n } from "i18next";
-import { setZodLocale } from "../../utils/setZodLocale";
+import { setZodLocale } from "@repo/shared/utils";
 
 /**
  * Sets proper Zod locale based on the current i18n language.

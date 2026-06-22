@@ -1,2 +1,2 @@
-export { useErrorHandling } from "./errors/useErrorHandling";
-export { useZodLocale } from "./i18n/useZodLocale";
+export * from "./errors";
+export * from "./i18n";

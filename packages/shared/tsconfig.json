@@ -6,9 +6,7 @@
     "paths": {
       "@repo/contract": ["../contract/src/index.ts"],
       "@repo/contract/*": ["../contract/src/*"],
-      "@repo/shared/hooks": ["./src/hooks/index.ts"],
-      "@repo/shared/consts": ["./src/consts/index.ts"],
-      "@repo/shared/utils": ["./src/utils/index.ts"]
+      "@repo/shared/*": ["./src/*"]
     }
   },
   "include": ["src"],
