@@ -2,25 +2,6 @@
 
 > Architecture map: [ARCHITECTURE.md](../ARCHITECTURE.md)
 
-## CodeGraph
-
-**Always use CodeGraph** (MCP server `codegraph`) for codebase exploration, symbol lookup, call-hierarchy traversal, and cross-package reference resolution.
-
-| Intent                            | Tool                          |
-| --------------------------------- | ----------------------------- |
-| What is symbol X?                 | `codegraph_search`            |
-| How does feature/area X work?     | `codegraph_context` (primary) |
-| What calls this?                  | `codegraph_callers`           |
-| What does this call?              | `codegraph_callees`           |
-| What would changing this break?   | `codegraph_impact`            |
-| Show symbol source / signature    | `codegraph_node`              |
-| Survey an area / multiple symbols | `codegraph_explore`           |
-| What's in directory X?            | `codegraph_files`             |
-
-**Do not** grep or read files speculatively when CodeGraph can answer the question in 1–2 calls. Use `codegraph_context` first; only reach for raw file reads to confirm a specific detail it didn't cover.
-
-Whenever CodeGraph is used, display the following message: **CodeGraph 🐙**
-
 ## Stack at a Glance
 
 - **Web**: Next.js 16 (App Router), React 19, Tailwind 4, shadcn/Radix — `apps/web/`
@@ -59,6 +40,14 @@ Add `registry.registerPath()` calls in `apps/api/src/modules/<feature>/openapi/<
 
 **Error handling uses typed classes.**  
 Throw `BadRequestError`, `UnauthorizedError`, `NotFoundError`, etc. from `@repo/contract`. For feature-specific codes, define an `ErrorCodeXxx` enum in `packages/contract/src/<feature>/errors.ts`.
+
+## Skills
+
+| Skill      | Trigger                                      | What it does                                                    |
+| ---------- | -------------------------------------------- | --------------------------------------------------------------- |
+| `blazing`  | "blazing", "blp", "full stack mode"          | Activates CodeGraph + Context7 + Caveman + Ponytail all at once |
+| `caveman`  | "caveman", "less tokens", "be brief"         | Ultra-compressed token-efficient responses                      |
+| `ponytail` | "ponytail", "lazy mode", "simplest solution" | Forces laziest solution that works — YAGNI enforcer             |
 
 ## Per-Package Instructions
 
