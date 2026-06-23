@@ -35,8 +35,8 @@ Activate all four tools simultaneously and keep them active for every response.
 
 Append only what you actually used:
 
-- `codegraph_*` used → **CodeGraph 🐙** - Helped
-- `context7_*` used → **Context7 🕸️** - Helped
-- Caveman active → **Caveman 🪨** - Helped
-- Ponytail active → **Ponytail 🐴** - Helped
-- Blazing active → **Blazing 🔥** - Helped
+- `codegraph_*` used → **CodeGraph 🐙**
+- `context7_*` used → **Context7 🕸️**
+- Caveman active → **Caveman 🪨**
+- Ponytail active → **Ponytail 🐴**
+- Blazing active → **Blazing 🔥**

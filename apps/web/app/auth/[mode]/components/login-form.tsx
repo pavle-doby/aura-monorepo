@@ -9,7 +9,7 @@ import { AlertCircleIcon, Eye, EyeOff } from "lucide-react";
 import { useAuthLogin } from "@repo/api-client";
 import { AuthLoginQuerySchema, type AuthLogInUserReq } from "@repo/contract";
 import { useT } from "@repo/i18n/client";
-import { useErrorHandling } from "@repo/shared/hooks";
+import { useErrorHandlingForm, useZodLocale } from "@repo/shared";
 import { Card, CardContent } from "@repo/ui-web/components/card";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@repo/ui-web/components/field";
 import { Input } from "@repo/ui-web/components/input";
@@ -21,7 +21,10 @@ import { cn } from "@repo/ui-web/lib/utils";
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const id = useId();
   const router = useRouter();
+
   const { t, i18n } = useT();
+  useZodLocale(i18n);
+
   const [showPassword, setShowPassword] = useState(false);
 
   const { mutate: loginMutate, isPending } = useAuthLogin();
@@ -35,7 +38,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
     resolver: zodResolver(AuthLoginQuerySchema),
   });
 
-  const { handleErrorForm } = useErrorHandling<AuthLogInUserReq>({
+  const { handleErrorForm } = useErrorHandlingForm<AuthLogInUserReq>({
+    t,
     i18n,
     setError,
   });

@@ -66,3 +66,4 @@ Detailed conventions are auto-loaded when you work in these paths:
 | `packages/ui-theme/**`   | [ui-theme.instructions.md](instructions/ui-theme.instructions.md)     |
 | `packages/i18n/**`       | [i18n.instructions.md](instructions/i18n.instructions.md)             |
 | `packages/scripts/**`    | [scripts.instructions.md](instructions/scripts.instructions.md)       |
+| `apps/web/**` `apps/native/**` | [forms.instructions.md](instructions/forms.instructions.md)   |
