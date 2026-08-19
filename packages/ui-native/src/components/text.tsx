@@ -1,4 +1,4 @@
-import { cn } from "../lib/utils";
+import { cn } from "@repo/ui-native/lib/utils";
 import { Slot } from "@rn-primitives/slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
@@ -87,4 +87,3 @@ function Text({
 }
 
 export { Text, TextClassContext };
-export type { TextVariant, TextVariantProps };

@@ -82,6 +82,8 @@ PODS:
   - ExpoRouter (55.0.16):
     - ExpoModulesCore
     - RNScreens
+  - ExpoSecureStore (55.0.15):
+    - ExpoModulesCore
   - ExpoSplashScreen (55.0.21):
     - ExpoModulesCore
   - ExpoSymbols (55.0.9):
@@ -1956,6 +1958,28 @@ PODS:
     - React-utils (= 0.83.6)
     - ReactNativeDependencies
   - ReactNativeDependencies (0.83.6)
+  - RNGestureHandler (3.0.2):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - RNReanimated (4.2.1):
     - hermes-engine
     - RCTRequired
@@ -2220,7 +2244,8 @@ DEPENDENCIES:
   - "ExpoLogBox (from `../../../node_modules/.pnpm/@expo+log-box@55.0.12_@expo+dom-webview@55.0.6_expo@55.0.26_react-native@0.83.6_@babel+_ec4343d60fd13129abe54666f8232b3c/node_modules/@expo/log-box`)"
   - "ExpoModulesCore (from `../../../node_modules/.pnpm/expo-modules-core@55.0.25_react-native-worklets@0.7.4_@babel+core@7.29.7_react-native@0_691ed52cfffc3d146c900f0ab6f1b3ce/node_modules/expo-modules-core`)"
   - "ExpoModulesJSI (from `../../../node_modules/.pnpm/expo-modules-core@55.0.25_react-native-worklets@0.7.4_@babel+core@7.29.7_react-native@0_691ed52cfffc3d146c900f0ab6f1b3ce/node_modules/expo-modules-core`)"
-  - "ExpoRouter (from `../../../node_modules/.pnpm/expo-router@55.0.16_@expo+log-box@55.0.12_@expo+metro-runtime@55.0.11_@types+react-dom@_68eee115df7860d3bf3d6c0e784e6a8d/node_modules/expo-router/ios`)"
+  - "ExpoRouter (from `../../../node_modules/.pnpm/expo-router@55.0.16_25825c14dfbdee9e9210699a1cc1a890/node_modules/expo-router/ios`)"
+  - "ExpoSecureStore (from `../../../node_modules/.pnpm/expo-secure-store@55.0.15_expo@55.0.26/node_modules/expo-secure-store/ios`)"
   - "ExpoSplashScreen (from `../../../node_modules/.pnpm/expo-splash-screen@55.0.21_expo@55.0.26_typescript@5.9.3/node_modules/expo-splash-screen/ios`)"
   - "ExpoSymbols (from `../../../node_modules/.pnpm/expo-symbols@55.0.9_expo-font@55.0.8_expo@55.0.26_react-native@0.83.6_@babel+core@7.29._c4745541571a80cd70f2623ad09f25dd/node_modules/expo-symbols/ios`)"
   - "ExpoSystemUI (from `../../../node_modules/.pnpm/expo-system-ui@55.0.18_expo@55.0.26_react-native-web@0.21.2_react-dom@19.2.0_react@19.2_8e75252df354fc6de25cfc5e39a6557d/node_modules/expo-system-ui/ios`)"
@@ -2298,6 +2323,7 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios/ReactCodegen`)
   - "ReactCommon/turbomodule/core (from `../../../node_modules/.pnpm/react-native@0.83.6_@babel+core@7.29.7_@types+react@19.2.15_react@19.2.0/node_modules/react-native/ReactCommon`)"
   - "ReactNativeDependencies (from `../../../node_modules/.pnpm/react-native@0.83.6_@babel+core@7.29.7_@types+react@19.2.15_react@19.2.0/node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec`)"
+  - "RNGestureHandler (from `../../../node_modules/.pnpm/react-native-gesture-handler@3.0.2_react-native@0.83.6_@babel+core@7.29.7_@types+react@_2d78bf5afa716e112db368ab417eefb6/node_modules/react-native-gesture-handler`)"
   - "RNReanimated (from `../../../node_modules/.pnpm/react-native-reanimated@4.2.1_react-native-worklets@0.7.4_@babel+core@7.29.7_react-nati_9e70549be8de635723d66c824c671928/node_modules/react-native-reanimated`)"
   - "RNScreens (from `../../../node_modules/.pnpm/react-native-screens@4.23.0_react-native@0.83.6_@babel+core@7.29.7_@types+react@19.2.15_react@19.2.0__react@19.2.0/node_modules/react-native-screens`)"
   - "RNSVG (from `../../../node_modules/.pnpm/react-native-svg@15.15.3_react-native@0.83.6_@babel+core@7.29.7_@types+react@19.2.15_react@19.2.0__react@19.2.0/node_modules/react-native-svg`)"
@@ -2342,7 +2368,9 @@ EXTERNAL SOURCES:
   ExpoModulesJSI:
     :path: "../../../node_modules/.pnpm/expo-modules-core@55.0.25_react-native-worklets@0.7.4_@babel+core@7.29.7_react-native@0_691ed52cfffc3d146c900f0ab6f1b3ce/node_modules/expo-modules-core"
   ExpoRouter:
-    :path: "../../../node_modules/.pnpm/expo-router@55.0.16_@expo+log-box@55.0.12_@expo+metro-runtime@55.0.11_@types+react-dom@_68eee115df7860d3bf3d6c0e784e6a8d/node_modules/expo-router/ios"
+    :path: "../../../node_modules/.pnpm/expo-router@55.0.16_25825c14dfbdee9e9210699a1cc1a890/node_modules/expo-router/ios"
+  ExpoSecureStore:
+    :path: "../../../node_modules/.pnpm/expo-secure-store@55.0.15_expo@55.0.26/node_modules/expo-secure-store/ios"
   ExpoSplashScreen:
     :path: "../../../node_modules/.pnpm/expo-splash-screen@55.0.21_expo@55.0.26_typescript@5.9.3/node_modules/expo-splash-screen/ios"
   ExpoSymbols:
@@ -2496,6 +2524,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/.pnpm/react-native@0.83.6_@babel+core@7.29.7_@types+react@19.2.15_react@19.2.0/node_modules/react-native/ReactCommon"
   ReactNativeDependencies:
     :podspec: "../../../node_modules/.pnpm/react-native@0.83.6_@babel+core@7.29.7_@types+react@19.2.15_react@19.2.0/node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec"
+  RNGestureHandler:
+    :path: "../../../node_modules/.pnpm/react-native-gesture-handler@3.0.2_react-native@0.83.6_@babel+core@7.29.7_@types+react@_2d78bf5afa716e112db368ab417eefb6/node_modules/react-native-gesture-handler"
   RNReanimated:
     :path: "../../../node_modules/.pnpm/react-native-reanimated@4.2.1_react-native-worklets@0.7.4_@babel+core@7.29.7_react-nati_9e70549be8de635723d66c824c671928/node_modules/react-native-reanimated"
   RNScreens:
@@ -2522,6 +2552,7 @@ SPEC CHECKSUMS:
   ExpoModulesCore: 5e1ad569ce7cf8d35c0737585f34cc299fc3f0ca
   ExpoModulesJSI: 964334271fc77832736f66ee1785761cdc778dbe
   ExpoRouter: e0e2aa4b03843e7abfa3e63e0cdd6c642d74780f
+  ExpoSecureStore: f495a3e0ab65683be8427a96f694726a88048f46
   ExpoSplashScreen: 049301b226bce8284fcafb7923fcad3a43f23a9f
   ExpoSymbols: 896159288ad708e1a32dc12c92fe5f90bff01126
   ExpoSystemUI: fbc4f8af83f2b8338c1de69a79624769536f09d1
@@ -2601,6 +2632,7 @@ SPEC CHECKSUMS:
   ReactCodegen: d8ab76cabf21ff40474090ea33bc0bdafda310dd
   ReactCommon: ba28cd4e7d9e24014d2772a80e32da020c732b00
   ReactNativeDependencies: a4af925f2fbf56d61e5ef1d511f3fae5a3b30f9c
+  RNGestureHandler: 70c66b3f20c21877cd0cd3fa6272a0ec4db58af8
   RNReanimated: fb0d425f2884b38a82d79d95e5cfd6216f2b20c2
   RNScreens: 02e62f995ceb94ea465864b3bf4d4767b87f0362
   RNSVG: 0bd149b873018bc6e0e3321e2f6435bdba294460
